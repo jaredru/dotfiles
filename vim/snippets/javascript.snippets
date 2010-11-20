@@ -1,0 +1,135 @@
+
+##################################################
+# Class
+#
+
+snippet cl
+	var ${1:class} = (function() {
+		function $1(${2}) {
+			${3:// constructor}
+		}
+
+		$1.prototype = {
+		};
+
+		return $1;
+	})();
+#
+
+##################################################
+# Functions
+#
+
+# normal function
+snippet fun
+	function ${1:name}(${2}) {
+		${3:// body...}
+	}
+#
+
+# anonymous function
+snippet f
+	function(${1}) {${2}}
+#
+
+# object function
+snippet f:
+	${1:name}: function(${2}) {
+		${4:// body}
+	}${3:,}
+#
+
+##################################################
+# Objects
+#
+
+# normal object
+snippet obj
+	{
+		${2}
+	}${1}
+#
+
+# inline object
+snippet o
+	{ ${1} }${2}
+#
+
+# object in an object
+snippet o:
+	${1:name}: {
+		${3:// stuff}
+	}${2:,}
+#
+
+##################################################
+# For Loop
+#
+
+snippet for
+	for (var ${1:i} = 0; $1 < ${2:arr}${3:.length}; $1${4:++}) {
+		${5:$2[$1]}
+	}
+#
+
+# Prototype
+snippet proto
+	${1:class_name}.prototype.${2:method_name} =
+	function(${3:first_argument}) {
+		${4:// body...}
+	};
+# if
+snippet if
+	if (${1:true}) {${2}};
+# if ... else
+snippet ife
+	if (${1:true}) {${2}}
+	else{${3}};
+# tertiary conditional
+snippet t
+	${1:/* condition */} ? ${2:a} : ${3:b}
+# switch
+snippet switch
+	switch(${1:expression}) {
+		case '${3:case}':
+			${4:// code}
+			break;
+		${5}
+		default:
+			${2:// code}
+	}
+# case
+snippet case
+	case '${1:case}':
+		${2:// code}
+		break;
+	${3}
+# for (...) {...} (Improved Native For-Loop)
+snippet forr
+	for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; $2${3:--}) {
+		${4:$1[$2]}
+	};
+# while (...) {...}
+snippet wh
+	while (${1:/* condition */}) {
+		${2:/* code */}
+	}
+# do...while
+snippet do
+	do {
+		${2:/* code */}
+	} while (${1:/* condition */});
+# Object Method
+snippet :f
+	${1:method_name}: function(${2:attribute}) {
+		${4}
+	}${3:,}
+# setTimeout function
+snippet timeout
+	setTimeout(function() {${3}}${2}, ${1:10};
+# Get Elements
+snippet get
+	getElementsBy${1:TagName}('${2}')${3}
+# Get Element
+snippet gett
+	getElementBy${1:Id}('${2}')${3}

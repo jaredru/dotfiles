@@ -1,0 +1,257 @@
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+"
+
+" behave less like vi (i.e. more vim features)
+set nocompatible
+
+" behave like windows instead of xterm
+source $VIMRUNTIME/mswin.vim
+
+" don't dump swap files in cwd
+set directory-=.
+set directory+=$TEMP
+
+" load filetype plugins
+filetype plugin on
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" GUI
+"
+
+" use my screen real estate
+set lines=60
+set columns=120
+
+" minimize the gui
+set guioptions=r
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fonts & Colors
+"
+
+" turn on syntax highlighting
+syntax on
+
+" use a better font
+set guifont=Lucida_Console:h9
+
+" set the default color scheme
+colorscheme jColor
+
+" set console colors
+if !has("gui_running")
+    set background=dark
+    colorscheme default
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabs
+"
+
+" copy indent from current line when starting a new line
+" except in cases like following a {
+set autoindent
+set smartindent
+
+" tabs are 4 spaces
+set tabstop=4
+
+" tabs feel like 4 spaces
+set softtabstop=4
+
+" autoindents are 4 spaces
+set shiftwidth=4
+
+" use spaces instead of tabs
+set expandtab
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" User Interface
+"
+
+" don't wrap lines
+set nowrap
+
+" show line numbers
+set number
+
+" show tabs and trailing spaces
+set listchars=tab:»·,trail:•
+set list
+
+" flash matched parentheses, brackets, and braces
+set showmatch
+
+" flash instead of beep for errors
+set visualbell
+
+" don't redraw when running macros
+set lazyredraw
+
+" change the default status line
+" and always display it
+set statusline=%t\ [%Y%M%R]\ CWD=%{getcwd()}%=%-14.(Line:\%l/%L%)\ %-7.(Col:%3c%)
+set laststatus=2
+
+" show matches for command completion
+set wildmenu
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Movement
+"
+
+" keep four lines when scrolling
+set scrolloff=3
+
+" move freely between lines
+set whichwrap+=<,>,[,],h,l
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Searching
+"
+
+" make searches case insensitive
+" unless they're mixed case
+set ignorecase
+set smartcase
+
+" search while typing
+set incsearch
+
+" do not highlight the last used search term
+set nohlsearch
+
+" by default we want substitutions to occur in the entire line
+set gdefault
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Files
+"
+
+" allow switching buffers without saving
+set hidden
+
+" automatically set our working dir to the current file
+set autochdir
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings
+"
+
+" when text is selected, tab and shift-tab should indent
+" vnoremap <TAB>   >
+" vnoremap <S-TAB> <
+vnoremap > >gv
+vnoremap < <gv
+
+" ctrl-tab and ctrl-shift-tab should switch buffers
+noremap <C-TAB>   :bnext<CR>
+noremap <C-S-TAB> :bprevious<CR>
+
+inoremap <C-TAB>   <ESC>:bnext<CR>
+inoremap <C-S-TAB> <ESC>:bprevious<CR>
+
+" ctrl+w should close the buffer
+noremap  <C-W>      :bdelete<CR>
+inoremap <C-W> <ESC>:bdelete<CR>
+
+" ctrl+left and ctrl+right should do the right thing in normal mode
+noremap  <C-LEFT>  b
+noremap  <C-RIGHT> e
+
+" ctrl+shift+left and ctrl+shift+right should do the right thing
+noremap  <C-S-LEFT> vb<C-G>
+inoremap <C-S-LEFT> <C-\><C-O>vb<C-G>
+vnoremap <C-S-LEFT> b
+
+noremap  <C-S-RIGHT> ve<C-G>
+inoremap <C-S-RIGHT> <C-\><C-O>ve<C-G>
+vnoremap <C-S-RIGHT> e
+
+" shift+j and shift+k should move by pages
+noremap <S-J> <PageDown>
+noremap <S-K> <PageUp>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Find & Replace
+"
+
+" find
+noremap  <C-F>      /<C-R><C-W>
+inoremap <C-F> <C-O>/<C-R><C-W>
+
+function! FindAndReplace(highlight)
+    if matchstr(a:highlight, "\n") != ""
+        " this should work, but vim doesn't like the `s
+        " let @h = "`<,`>s//"
+        let @h = '%s/\%V/'
+    else
+        let @h = "%s/" . escape(a:highlight, "/") . "//"
+    endif
+endfunction
+
+noremap  <C-H>      :%s/<C-R><C-W>//<Left>
+inoremap <C-H> <C-O>:%s/<C-R><C-W>//<Left>
+vnoremap <C-H> "hy:exec 'call FindAndReplace("' . escape(escape(@h, '"\'), '"\/') . '")'<CR>:<C-R>h<Left>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Edit Source/Header
+"
+
+function! EditSourceOrHeader()
+    if matchstr(expand("%"), "\.cpp$") != ""
+        if filereadable(expand("%:r") . ".w")
+            exec "edit " . expand("%:r") . ".w"
+        else
+            exec "edit " . expand("%:r") . ".h"
+            if !filereadable(expand("%:r") . ".h")
+                echomsg "Guessed associated header file..."
+            endif
+        endif
+    else
+        exec "edit " . expand("%:r") . ".cpp"
+        if !filereadable(expand("%:r") . ".cpp")
+            echomsg "Guessed associated source file..."
+        endif
+    endif
+endfunction
+
+noremap  <C-F10>      :call EditSourceOrHeader()<CR>
+inoremap <C-F10> <C-O>:call EditSourceOrHeader()<CR>
+vnoremap <C-F10> <C-C>:call EditSourceOrHeader()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocommands
+"
+
+" when editing a file, jump to the last cursor position
+autocmd BufReadPost * call RestorePosition()
+function! RestorePosition()
+    if line("'\"") <= line("$")
+        execute "normal `\""
+    else
+        execute "normal $"
+    endif
+endfunction
+
+" override vim's default ftplugins for indenting our text
+autocmd FileType * set formatoptions-=o
+autocmd FileType * set formatoptions-=r
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Other Environments
+"
+
+if filereadable($HOME . "/work.vim")
+    source $HOME/work.vim
+endif
+
