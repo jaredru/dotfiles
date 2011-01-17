@@ -3,28 +3,51 @@
 # Class
 #
 
-snippet cl
-	var ${1:class} = (function() {
-		function $1(${2}) {
-			${3:// constructor}
-		}
+# prototype
+snippet proto
+	${1:class}.prototype = {
 
-		$1.prototype = {
-		};
+		${2:// prototype}
 
-		return $1;
-	})();
+	};
+#
+
+##################################################
+# Variables
+#
+
+# function variable
+snippet vf
+	var ${1} = function(${2}) {
+		${3:// body...}
+	};
+#
+
+# object variable
+snippet vo
+	var ${1} = {
+
+		${2:// body...}
+
+	};
 #
 
 ##################################################
 # Functions
 #
 
-# normal function
-snippet fun
+# named function
+snippet func
 	function ${1:name}(${2}) {
 		${3:// body...}
 	}
+#
+
+# unnamed function
+snippet fn
+	function(${1}) {
+		${3:// body...}
+	}${2:;}
 #
 
 # anonymous function
@@ -46,19 +69,23 @@ snippet f:
 # normal object
 snippet obj
 	{
+
 		${2}
-	}${1}
+
+	}${1:;}
 #
 
 # inline object
 snippet o
-	{ ${1} }${2}
+	{ ${2} }${1}
 #
 
 # object in an object
 snippet o:
 	${1:name}: {
+
 		${3:// stuff}
+
 	}${2:,}
 #
 
@@ -72,12 +99,6 @@ snippet for
 	}
 #
 
-# Prototype
-snippet proto
-	${1:class_name}.prototype.${2:method_name} =
-	function(${3:first_argument}) {
-		${4:// body...}
-	};
 # if
 snippet if
 	if (${1:true}) {${2}};
@@ -119,11 +140,6 @@ snippet do
 	do {
 		${2:/* code */}
 	} while (${1:/* condition */});
-# Object Method
-snippet :f
-	${1:method_name}: function(${2:attribute}) {
-		${4}
-	}${3:,}
 # setTimeout function
 snippet timeout
 	setTimeout(function() {${3}}${2}, ${1:10};

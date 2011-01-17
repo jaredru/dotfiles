@@ -98,6 +98,9 @@ set laststatus=2
 " show matches for command completion
 set wildmenu
 
+" show the popup even for just one match
+set completeopt=menu,menuone,preview
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Movement
 "
@@ -176,6 +179,9 @@ vnoremap <C-S-RIGHT> e
 " shift+j and shift+k should move by pages
 noremap <S-J> <PageDown>
 noremap <S-K> <PageUp>
+
+vnoremap <S-J> <S-PageDown>
+vnoremap <S-K> <S-PageUp>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Find & Replace
