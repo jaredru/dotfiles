@@ -177,11 +177,11 @@ inoremap <C-S-RIGHT> <C-\><C-O>ve<C-G>
 vnoremap <C-S-RIGHT> e
 
 " shift+j and shift+k should move by pages
-noremap <S-J> <PageDown>
-noremap <S-K> <PageUp>
+nnoremap <S-J> <PageDown>
+nnoremap <S-K> <PageUp>
 
-vnoremap <S-J> <S-PageDown>
-vnoremap <S-K> <S-PageUp>
+xnoremap <S-J> <S-PageDown>
+xnoremap <S-K> <S-PageUp>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Find & Replace
