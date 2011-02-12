@@ -3,6 +3,11 @@
 " General
 "
 
+" edit this file
+noremap  <C-F1>      :e ~/vimfiles/vimrc<CR>
+inoremap <C-F1> <C-O>:e ~/vimfiles/vimrc<CR>
+vnoremap <C-F1> <C-C>:e ~/vimfiles/vimrc<CR>
+
 " behave less like vi (i.e. more vim features)
 set nocompatible
 
@@ -54,6 +59,9 @@ endif
 " except in cases like following a {
 set autoindent
 set smartindent
+
+" smartindent does weird things with #
+inoremap # X#
 
 " tabs are 4 spaces
 set tabstop=4
@@ -187,10 +195,6 @@ xnoremap <S-K> <S-PageUp>
 " Find & Replace
 "
 
-" find
-noremap  <C-F>      /<C-R><C-W>
-inoremap <C-F> <C-O>/<C-R><C-W>
-
 function! FindAndReplace(highlight)
     if matchstr(a:highlight, "\n") != ""
         " this should work, but vim doesn't like the `s
@@ -235,6 +239,11 @@ vnoremap <C-F10> <C-C>:call EditSourceOrHeader()<CR>
 " Plugins
 "
 
+" edit the snippets file for the current filetype
+noremap  <C-F2>      :exec "edit " . snippets_dir . &ft . ".snippets"<CR>
+inoremap <C-F2> <C-O>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
+vnoremap <C-F2> <C-C>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 "
@@ -252,6 +261,7 @@ endfunction
 " override vim's default ftplugins for indenting our text
 autocmd FileType * set formatoptions-=o
 autocmd FileType * set formatoptions-=r
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Other Environments
