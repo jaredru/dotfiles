@@ -3,11 +3,6 @@
 " General
 "
 
-" edit this file
-noremap  <C-F1>      :e ~/vimfiles/vimrc<CR>
-inoremap <C-F1> <C-O>:e ~/vimfiles/vimrc<CR>
-vnoremap <C-F1> <C-C>:e ~/vimfiles/vimrc<CR>
-
 " behave less like vi (i.e. more vim features)
 set nocompatible
 
@@ -154,9 +149,12 @@ set autochdir
 " Mappings
 "
 
+" edit this file
+noremap  <C-F1>      :e ~/vimfiles/vimrc<CR>
+inoremap <C-F1> <C-O>:e ~/vimfiles/vimrc<CR>
+vnoremap <C-F1> <C-C>:e ~/vimfiles/vimrc<CR>
+
 " when text is selected, tab and shift-tab should indent
-" vnoremap <TAB>   >
-" vnoremap <S-TAB> <
 vnoremap > >gv
 vnoremap < <gv
 
@@ -191,6 +189,9 @@ nnoremap <S-K> <PageUp>
 xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
 
+" ctrl+[ should be the opposite of ctrl-] (pop the tag stack)
+noremap <C-[> <C-T>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Find & Replace
 "
@@ -210,32 +211,6 @@ inoremap <C-H> <C-O>:%s/<C-R><C-W>//<Left>
 vnoremap <C-H> "hy:exec 'call FindAndReplace("' . escape(escape(@h, '"\'), '"\/') . '")'<CR>:<C-R>h<Left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Edit Source/Header
-"
-
-function! EditSourceOrHeader()
-    if matchstr(expand("%"), "\.cpp$") != ""
-        if filereadable(expand("%:r") . ".w")
-            exec "edit " . expand("%:r") . ".w"
-        else
-            exec "edit " . expand("%:r") . ".h"
-            if !filereadable(expand("%:r") . ".h")
-                echomsg "Guessed associated header file..."
-            endif
-        endif
-    else
-        exec "edit " . expand("%:r") . ".cpp"
-        if !filereadable(expand("%:r") . ".cpp")
-            echomsg "Guessed associated source file..."
-        endif
-    endif
-endfunction
-
-noremap  <C-F10>      :call EditSourceOrHeader()<CR>
-inoremap <C-F10> <C-O>:call EditSourceOrHeader()<CR>
-vnoremap <C-F10> <C-C>:call EditSourceOrHeader()<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 "
 
@@ -243,6 +218,16 @@ vnoremap <C-F10> <C-C>:call EditSourceOrHeader()<CR>
 noremap  <C-F2>      :exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 inoremap <C-F2> <C-O>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 vnoremap <C-F2> <C-C>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
+
+" filetype switching
+augroup SourceHeaderPairs
+    autocmd BufEnter *.cpp,*.cxx,*.cc,*.c let b:fswitchdst = "h,hpp"
+    autocmd BufEnter *.hpp,*.hxx,*.h      let b:fswitchdst = "cpp,cxx,cc,c"
+augroup end
+
+noremap  <C-F10>      :FSHere<CR>
+inoremap <C-F10> <C-O>:FSHere<CR>
+vnoremap <C-F10> <C-C>:FSHere<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
