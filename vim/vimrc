@@ -189,9 +189,6 @@ nnoremap <S-K> <PageUp>
 xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
 
-" ctrl+[ should be the opposite of ctrl-] (pop the tag stack)
-noremap <C-[> <C-T>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Find & Replace
 "
@@ -221,8 +218,9 @@ vnoremap <C-F2> <C-C>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 
 " filetype switching
 augroup SourceHeaderPairs
-    autocmd BufEnter *.cpp,*.cxx,*.cc,*.c let b:fswitchdst = "h,hpp"
-    autocmd BufEnter *.hpp,*.hxx,*.h      let b:fswitchdst = "cpp,cxx,cc,c"
+    autocmd BufEnter *.cpp,*.cxx,*.cc,*.c let b:fswitchdst  = "h,hpp"
+    autocmd BufEnter *.hpp,*.hxx,*.h      let b:fswitchdst  = "cpp,cxx,cc,c"
+    autocmd BufEnter *                    let b:fswitchlocs = "./"
 augroup end
 
 noremap  <C-F10>      :FSHere<CR>
