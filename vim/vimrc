@@ -199,7 +199,7 @@ function! FindAndReplace(highlight)
         " let @h = "`<,`>s//"
         let @h = '%s/\%V/'
     else
-        let @h = "%s/" . escape(a:highlight, "/") . "//"
+        let @h = "%s/" . escape(a:highlight, "./") . "//"
     endif
 endfunction
 

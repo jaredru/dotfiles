@@ -3,18 +3,9 @@
 # Class
 #
 
-# prototype
-snippet proto
-	${1:class}.prototype = {
-
-		${2:// prototype}
-
-	};
-#
-
 # function
 snippet pf
-	${1:class}.prototype.${2:fn} = function(${3}) {
+	${1:`Filename("", "class")`}.prototype.${2:fn} = function(${3}) {
 		${4:// body...}
 	};
 #
@@ -25,7 +16,7 @@ snippet pf
 
 # function variable
 snippet vf
-	var ${1} = function(${2}) {
+	var ${1:`Filename()`} = function(${2}) {
 		${3:// body...}
 	};
 #
@@ -101,8 +92,26 @@ snippet o:
 #
 
 snippet for
-	for (var ${1:i} = 0; $1 < ${2:arr}${3:.length}; $1${4:++}) {
-		${5:$2[$1]}
+	for (var ${1:i} = 0, ${2:len} = ${3:arr}${4:.length}; $1 < $2; ${5:++}$1) {
+		${6:$3[$1]}
+	}
+#
+
+snippet forr
+	for (var ${1:i} = ${2:arr}.length; $1--;) {
+		${3:$2[$1]}
+	}
+#
+
+##################################################
+# Try/Catch
+#
+
+# try
+snippet try
+	try {
+		${2:// try}
+	} catch (${1:e}) {
 	}
 #
 
@@ -132,11 +141,6 @@ snippet case
 		${2:// code}
 		break;
 	${3}
-# for (...) {...} (Improved Native For-Loop)
-snippet forr
-	for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; $2${3:--}) {
-		${4:$1[$2]}
-	};
 # while (...) {...}
 snippet wh
 	while (${1:/* condition */}) {
