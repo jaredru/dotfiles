@@ -73,10 +73,6 @@ function! s:CommentLines(first, last, uncomment)
         while l:i <= a:last
             let l:line = getline(l:i)
 
-            " while in this loop, we also take time to find the fewest whitespace
-            " characters at the start of any given line.  we do this so we can
-            " later indent our comments as much as possible while ensuring all our
-            " comments start in the same column.
             if strlen(l:line) > 0
                 let l:LineWhiteSpace    = matchstr(l:line, '^\s*')
                 let l:LineWhiteSpaceLen = strlen(l:LineWhiteSpace)
