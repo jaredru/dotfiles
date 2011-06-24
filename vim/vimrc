@@ -227,6 +227,22 @@ noremap  <C-F10>      :FSHere<CR>
 inoremap <C-F10> <C-O>:FSHere<CR>
 vnoremap <C-F10> <C-C>:FSHere<CR>
 
+" commenting
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims           = 1
+
+noremap  <silent> <C-K>      :call NERDComment(0, "alignBoth")<CR>
+inoremap <silent> <C-K> <C-O>:call NERDComment(0, "alignBoth")<CR>
+xnoremap <silent> <C-K> <C-C>:call NERDComment(1, "alignBoth")<CR>gv
+snoremap <silent> <C-K> <C-C>:call NERDComment(1, "alignBoth")<CR>gv<C-G>
+
+noremap  <silent> <C-J>      :call NERDComment(0, "uncomment")<CR>
+inoremap <silent> <C-J> <C-O>:call NERDComment(0, "uncomment")<CR>
+xnoremap <silent> <C-J> <C-C>:call NERDComment(1, "uncomment")<CR>gv
+snoremap <silent> <C-J> <C-C>:call NERDComment(1, "uncomment")<CR>gv<C-G>
+
+let g:loaded_comment = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 "

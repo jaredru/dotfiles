@@ -344,7 +344,11 @@ function! s:InitWindow()
     imap <buffer> <silent> <ESC>OB  <DOWN>
     imap <buffer> <silent> <ESC>OC  <RIGHT>
     imap <buffer> <silent> <ESC>OD  <LEFT>
-    setlocal timeoutlen=1
+
+    " timeoutlen does not have a local value, so we have to save and restore
+    " it manually.
+    let s:SavedTimeoutLen = &timeoutlen
+    set timeoutlen=1
 
     " setup mappings
     inoremap <buffer> <silent> <ESC>        <ESC>:CloseFileList<CR>
@@ -395,6 +399,9 @@ function! s:CloseFileList()
     if s:FocusWindow(s:WindowName)
         close
     endif
+
+    " restore the old timeoutlen
+    let &timeoutlen = s:SavedTimeoutLen
 
     " free up some memory
     let s:FileList = []

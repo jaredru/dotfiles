@@ -3,6 +3,11 @@
 " Commenting
 "
 
+if exists("loaded_comment")
+    finish
+endif
+let g:loaded_comment = 1
+
 "
 " Configuration Options
 "
