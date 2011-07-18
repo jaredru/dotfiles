@@ -12,6 +12,6 @@ augroup Filetypes
     autocmd! BufNewFile,BufRead sources setfiletype makefile
 
     " MsBuild
-    autocmd! BufNewFile,BufRead *.settings,*.targets setfiletype xml
+    autocmd! BufNewFile,BufRead *.settings,*.targets,*.wwaproj setfiletype xml
 augroup END
 

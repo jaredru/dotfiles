@@ -15,15 +15,16 @@ path_list = [
 paths = [path for path in path_list if os.path.exists(path)]
 
 # we filter by full filenames and extensions
+sep   = re.escape(os.sep)
 files = ["files", "without", "extensions"]
 exts  = ["cpp", "h", "py", "xml"]
 
-filter_files = "|".join([re.escape(os.sep) + f for f in files])
-filter_exts  = "|".join(exts)
-filter       = ".*(" + filter_files + "|(" + "\.(" + filter_exts + ")))$"
+filter_files = sep + "(" + "|".join(files) + ")$"
+filter_exts  = r"\.(" + "|".join(exts) + ")$"
+filter       = filter_files + "|" + filter_exts
 
 # things we don't care about
-# disallow = r".*\\objd?\\.*"
+# disallow = r"\\objd?"
 
 # build our filters as compiled regular expressions
 allowed = re.compile(filter)
@@ -41,12 +42,12 @@ def FindFiles(folder):
             FindFiles(fullpath)
 
         # if it matches our filters, track it
-        elif allowed.match(fullpath): # and not denied.match(fullpath):
+        elif allowed.search(fullpath): # and not denied.search(fullpath):
             matches.append("%s (%s)" % (listing, folder))
 
 print("finding matches:")
 print("  " + filter)
-# print("and not:")
+# print("but not:")
 # print("  " + disallow)
 print()
 
