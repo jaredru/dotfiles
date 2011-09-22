@@ -30,8 +30,8 @@ inoremap <silent> <C-F12> <C-O>:call SDRevert()<CR>
 " search for the word with mouse focus
 function! SourceSearch(term)
     let exe  = '\\wlxindex\Search\tools\search.exe'
-    let cmd  = ' -e:neutral -s wlxindex;idx;\\wlxindex\idx\'
-    let path = substitute($COREXTBRANCH, '\.', '\\', 'g') . ' '
+    let cmd  = ' -e:neutral -s wlxindex;mod;\\wlxindex\modern\'
+    let path = substitute($COREXTBRANCH, 'working.modern.', '', 'g') . ' '
     exec "silent !start " . exe . cmd . path . a:term
 endfunction
 
