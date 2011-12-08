@@ -159,15 +159,27 @@ vnoremap > >gv
 vnoremap < <gv
 
 " ctrl-tab and ctrl-shift-tab should switch buffers
-noremap <C-TAB>   :bnext<CR>
-noremap <C-S-TAB> :bprevious<CR>
+" noremap <C-TAB>   :bnext<CR>
+" noremap <C-S-TAB> :bprevious<CR>
 
-inoremap <C-TAB>   <ESC>:bnext<CR>
-inoremap <C-S-TAB> <ESC>:bprevious<CR>
+" inoremap <C-TAB>   <ESC>:bnext<CR>
+" inoremap <C-S-TAB> <ESC>:bprevious<CR>
 
 " ctrl+w should close the buffer
-noremap  <C-W>      :bdelete<CR>
-inoremap <C-W> <ESC>:bdelete<CR>
+function! DeleteCurrentBuffer()
+    let l:bufnr = bufnr("%")
+    let l:winnr = winnr("$")
+    bd
+
+    if winnr("$") == l:winnr
+        exec "b  " . l:bufnr
+        bn
+        exec "bd " . l:bufnr
+    endif
+endfunction
+
+noremap  <C-W>      :call DeleteCurrentBuffer()<CR>
+inoremap <C-W> <ESC>:call DeleteCurrentBuffer()<CR>
 
 " ctrl+left and ctrl+right should do the right thing in normal mode
 noremap  <C-LEFT>  b
@@ -243,6 +255,17 @@ snoremap <silent> <C-J> <C-C>:call NERDComment(1, "uncomment")<CR>gv<C-G>
 
 let g:loaded_comment = 1
 
+" conque
+noremap  <C-Space>      :ConqueTerm cmd<CR>
+inoremap <C-Space> <C-O>:ConqueTerm cmd<CR>
+
+" mini buffer explorer
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplCheckDupeBufs     = 0
+
+" let g:miniBufExplorerDebugLevel = 10 " MBE reports everything
+" let g:miniBufExplorerDebugMode  = 0  " Errors will show up in 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 "
@@ -260,7 +283,6 @@ endfunction
 " override vim's default ftplugins for indenting our text
 autocmd FileType * set formatoptions-=o
 autocmd FileType * set formatoptions-=r
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Other Environments

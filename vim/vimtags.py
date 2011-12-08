@@ -37,13 +37,15 @@ def FindFiles(folder):
         # join the folder to get the full path
         fullpath = os.path.join(folder, listing)
 
-        # if it's a directory, recurse
-        if os.path.isdir(fullpath):
-            FindFiles(fullpath)
+        # check if it's not denied before anything else
+        if not denied.search(fullpath):
+            # if it's a directory, recurse
+            if os.path.isdir(fullpath):
+                FindFiles(fullpath)
 
-        # if it matches our filters, track it
-        elif allowed.search(fullpath): # and not denied.search(fullpath):
-            matches.append("%s (%s)" % (listing, folder))
+            # if it matches our filters, track it
+            elif allowed.search(fullpath):
+                matches.append("%s (%s)" % (listing, folder))
 
 print("finding matches:")
 print("  " + filter)

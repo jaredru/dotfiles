@@ -1,27 +1,29 @@
 
-" use my tags
-set tags+=$INETROOT/tags
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Source Depot
 "
 
+" run an sd command
+function! SdExe(cmd)
+    silent exec "!start /min sd.exe " . a:cmd
+endfunction
+
 " edit the current file
-function! SDEdit()
-    call system("sd edit " . expand("%"))
+function! SdEdit()
+    call SdExe("edit " . expand("%"))
 endfunction
 
 " revert the current file
-function! SDRevert()
-    call system("sd revert " . expand("%"))
+function! SdRevert()
+    call SdExe("revert " . expand("%"))
 endfunction
 
 " map these functions
-noremap  <silent> <C-F11>      :call SDEdit()<CR>
-inoremap <silent> <C-F11> <C-O>:call SDEdit()<CR>
+noremap  <silent> <C-F11>      :call SdEdit()<CR>
+inoremap <silent> <C-F11> <C-O>:call SdEdit()<CR>
 
-noremap  <silent> <C-F12>      :call SDRevert()<CR>
-inoremap <silent> <C-F12> <C-O>:call SDRevert()<CR>
+noremap  <silent> <C-F12>      :call SdRevert()<CR>
+inoremap <silent> <C-F12> <C-O>:call SdRevert()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Source Search
@@ -44,6 +46,6 @@ inoremap <silent>  <C-O>:call SourceSearch(expand("<cword>"))<CR>
 "
 
 " filelist
-let g:FileList_IndexFile    = $INETROOT . "/filetags"
-let g:FileList_MaxToShow    = 72
+let g:FileList_IndexFile = $INETROOT . "/filetags"
+let g:FileList_MaxToShow = 72
 

@@ -71,8 +71,8 @@ endif
 " Script Variables
 "
 
-let s:WindowName    = "-FileList-"
-let s:LastSearch    = ""
+let s:WindowName = "-FileList-"
+let s:LastSearch = ""
 
 "
 " Functions
@@ -108,14 +108,19 @@ endfunction
 function! s:ShowWindow()
     " only create our window if we can't focus an existing one
     if !s:FocusWindow(s:WindowName)
-        exec "silent keepalt botright vsplit " . s:WindowName
+        " save the last buffer
+        let s:LastBuffer = bufnr("%")
+
+        " create our window
+        silent keepalt botright vsplit `=s:WindowName`
         call append(1, "")
     endif
 
     " ensure our temporary buffer is setup correctly
     setlocal noswapfile
     setlocal buftype=nofile
-    setlocal bufhidden=delete
+    setlocal bufhidden=wipe
+    setlocal nobuflisted
     setlocal nowrap
     setlocal foldcolumn=0
     setlocal nonumber
@@ -398,6 +403,7 @@ function! s:CloseFileList()
     " close the window
     if s:FocusWindow(s:WindowName)
         close
+        exec bufwinnr(s:LastBuffer) . " wincmd w"
     endif
 
     " restore the old timeoutlen
