@@ -162,7 +162,7 @@ lines were selected in visual-line mode.
 3.2.2 Nested comment map                                *NERDComNestedComment*
 
 Default mapping: [count]|<Leader>|cn
-Mapped to: <plug>NERDCommenterNest
+Mapped to: <plug>NERDCommenterNested
 Applicable modes: normal visual visual-line visual-block.
 
 Performs nested commenting.  Works the same as |<Leader>|cc except that if a line
@@ -288,7 +288,7 @@ to insert mode between the new delimiters.
 3.2.10 Insert comment map                               *NERDComInsertComment*
 
 Default mapping: disabled by default.
-Map it to: <plug>NERDCommenterInInsert
+Map it to: <plug>NERDCommenterInsert
 Applicable modes: insert.
 
 Adds comment delimiters at the current cursor position and inserts
@@ -372,16 +372,14 @@ Here the multipart delimiters are /* and */ and the marker is *.
 All of the NERD commenter mappings and menu items invoke a single function
 which delegates the commenting work to other functions. This function is
 public and has the prototype: >
-    function! NERDComment(isVisual, type)
+    function! NERDComment(mode, type)
 <
 The arguments to this function are simple:
-    - isVisual: if you wish to do any kind of visual comment then set this to
-      1 and the function will use the '< and '> marks to find the comment
-      boundries. If set to 0 then the function will operate on the current
-      line.
+    - mode: a character indicating the mode in which the comment is requested:
+     'n' for Normal mode, 'x' for Visual mode
     - type: is used to specify what type of commenting operation is to be
       performed, and it can be one of the following: "sexy", "invert",
-      "minimal", "toggle", "alignLeft", "alignBoth", "norm", "nested",
+      "minimal", "toggle", "alignLeft", "alignBoth", "comment", "nested",
       "toEOL", "append", "insert", "uncomment", "yank"
 
 For example, if you typed >
@@ -849,7 +847,7 @@ The latest dev versions are on github
     - remove "prepend comments" and "right aligned comments".
     - add support for applescript, calbire, man, SVNcommit, potwiki, txt2tags and SVNinfo.
       Thanks to nicothakis, timberke, sgronblo, mntnoe, Bernhard Grotz, John
-      O'Shea, François and Giacomo Mariani respectively.
+      O'Shea, FranÃ§ois and Giacomo Mariani respectively.
     - bugfix for haskell delimiters. Thanks to mntnoe.
 2.1.18
     - add support for llvm. Thanks to nicothakis.
@@ -857,7 +855,7 @@ The latest dev versions are on github
 2.1.17
     - fixed haskell delimiters (hackily). Thanks to Elias Pipping.
     - add support for mailcap. Thanks to Pascal Brueckner.
-    - add support for stata. Thanks to Jerónimo Carballo.
+    - add support for stata. Thanks to JerÃ³nimo Carballo.
     - applied a patch from ewfalor to fix an error in the help file with the
       NERDMapleader doc
     - disable the insert mode ctrl-c mapping by default, see :help
@@ -931,13 +929,13 @@ fREW                                gentoo-package-mask,
                                     gentoo-package-use, and vo_base
 Alexey                              verilog_systemverilog, systemverilog
 Lizendir                            fstab
-Michael Böhler                      autoit, autohotkey and docbk
+Michael BÃ¶hler                      autoit, autohotkey and docbk
 Aaron Small                         cmake
 Ramiro                              htmldjango and django
 Stefano Zacchiroli                  debcontrol, debchangelog, mkd
 Alex Tarkovsky                      ebuild and eclass
 Jorge Rodrigues                     gams
-Rainer Müller                       Objective C
+Rainer MÃ¼ller                       Objective C
 Jason Mills                         Groovy, ps1
 Normandie Azucena                   vera
 Florian Apolloner                   ldif
@@ -945,7 +943,7 @@ David Fishburn                      lookupfile
 Niels Aan de Brugh                  rst
 Don Hatlestad                       ahk
 Christophe Benz                     Desktop and xsd
-Eyolf Østrem                        lilypond, bbx and lytex
+Eyolf Ã˜strem                        lilypond, bbx and lytex
 Ingo Karkat                         dosbatch
 Nicolas Weber                       markdown, objcpp
 tinoucas                            gentoo-conf-d
@@ -973,15 +971,15 @@ Christophe Benz                     services, gitcommit
 A Pontus                            vimperator
 Stromnov                            slice, bzr
 Martin Kustermann                   pamconf
-Indriði Einarsson                   mason
+IndriÃ°i Einarsson                   mason
 Chris                               map
 Krzysztof A. Adamski                group
 Pascal Brueckner                    mailcap
-Jerónimo Carballo                   stata
+JerÃ³nimo Carballo                   stata
 Phillip Kovalev                     xquery
 Bernhard Grotz                      potwiki
 sgronblo                            man
-François                            txt2tags
+FranÃ§ois                            txt2tags
 Giacomo Mariani                     SVNinfo
 Matthew Lee Hinman                  newlisp, clojure
 Elias Pipping                       automake
@@ -1005,4 +1003,3 @@ tpope                               cucumber,pdf
 
 The NERD commenter is released under the wtfpl.
 See http://sam.zoy.org/wtfpl/COPYING.
-

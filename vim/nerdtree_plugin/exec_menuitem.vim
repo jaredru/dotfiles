@@ -39,4 +39,3 @@ function! NERDTreeExecFile()
         echo "Aborted"
     endif
 endfunction
-
