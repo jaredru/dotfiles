@@ -223,6 +223,10 @@ vnoremap <C-H> "hy:exec 'call FindAndReplace("' . escape(escape(@h, '"\'), '"\/'
 " Plugins
 "
 
+" set up pathogen runtime path manipulation
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
 " edit the snippets file for the current filetype
 noremap  <C-F2>      :exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 inoremap <C-F2> <C-O>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
