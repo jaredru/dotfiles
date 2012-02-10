@@ -227,6 +227,9 @@ vnoremap <C-H> "hy:exec 'call FindAndReplace("' . escape(escape(@h, '"\'), '"\/'
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
+" delimit helpers
+let g:delimitMate_expand_cr = 1
+
 " edit the snippets file for the current filetype
 noremap  <C-F2>      :exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 inoremap <C-F2> <C-O>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
