@@ -29,7 +29,7 @@ def launchJsenseParser():
     buffer[row] = line
 
     # call our jsense parser
-    subprocess.Popen([r"C:\Programming\Python\2.7.0\pythonw.exe", r"C:\Code\v8\jsense.py", vim.eval("v:servername"), joined])
+    subprocess.Popen([r"C:\Python27\pythonw.exe", r"C:\Users\JaredRu\Mesh\jsense.py", vim.eval("v:servername"), joined])
 
     # members = json.loads(res)
     # for name in members:
