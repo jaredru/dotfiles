@@ -17,6 +17,14 @@ set directory+=$TEMP
 filetype plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" Pathogen
+"
+
+" set up pathogen runtime path manipulation
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
 "
 
@@ -35,14 +43,16 @@ set guioptions=r
 syntax on
 
 " use a better font
-set guifont=Lucida_Console:h9
+set guifont=Consolas:h9
 
 " set the default color scheme
-colorscheme jColor
+set background=dark
+" let g:solarized_contrast="high"
+colorscheme solarized
+" colorscheme jColor
 
 " set console colors
 if !has("gui_running")
-    set background=dark
     colorscheme default
 endif
 
@@ -222,10 +232,6 @@ vnoremap <C-H> "hy:exec 'call FindAndReplace("' . escape(escape(@h, '"\'), '"\/'
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 "
-
-" set up pathogen runtime path manipulation
-runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#infect()
 
 " delimit helpers
 let g:delimitMate_expand_cr = 1
