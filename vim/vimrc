@@ -171,13 +171,6 @@ vnoremap <C-F1> <C-C>:e ~/vimfiles/vimrc<CR>
 vnoremap > >gv
 vnoremap < <gv
 
-" ctrl-tab and ctrl-shift-tab should switch buffers
-" noremap <C-TAB>   :bnext<CR>
-" noremap <C-S-TAB> :bprevious<CR>
-
-" inoremap <C-TAB>   <ESC>:bnext<CR>
-" inoremap <C-S-TAB> <ESC>:bprevious<CR>
-
 " ctrl+w should close the buffer
 function! DeleteCurrentBuffer()
     " get the current window and buffer
@@ -203,8 +196,8 @@ function! DeleteCurrentBuffer()
     endif
 endfunction
 
-noremap  <C-W>      :call DeleteCurrentBuffer()<CR>
-inoremap <C-W> <ESC>:call DeleteCurrentBuffer()<CR>
+noremap  <Leader>w      :call DeleteCurrentBuffer()<CR>
+inoremap <Leader>w <ESC>:call DeleteCurrentBuffer()<CR>
 
 " ctrl+left and ctrl+right should do the right thing in normal mode
 noremap  <C-LEFT>  b
@@ -256,6 +249,10 @@ vnoremap <C-F2> <C-C>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 " mini buffer explorer
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplCheckDupeBufs     = 0
+
+" filelist
+noremap  <silent> <Leader>f      :FileList<CR>
+inoremap <silent> <Leader>f <C-O>:FileList<CR>
 
 " filetype switching
 augroup SourceHeaderPairs
