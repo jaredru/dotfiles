@@ -159,6 +159,9 @@ set autochdir
 " Mappings
 "
 
+" comma leader is much more handy
+let mapleader=','
+
 " edit this file
 noremap  <C-F1>      :e ~/vimfiles/vimrc<CR>
 inoremap <C-F1> <C-O>:e ~/vimfiles/vimrc<CR>
@@ -177,13 +180,25 @@ vnoremap < <gv
 
 " ctrl+w should close the buffer
 function! DeleteCurrentBuffer()
+    " get the current window and buffer
     let l:bufnr = bufnr("%")
     let l:winnr = winnr("$")
+
+    " delete the buffer
     bd
 
+    " if we're still in the same window, make sure we went to the right buffer
     if winnr("$") == l:winnr
+        " reload the old buffer, and go to the next buffer
         exec "b  " . l:bufnr
         bn
+
+        " if we circled around to the beginning, go back
+        if bufnr("%") < l:bufnr
+            bp
+        endif
+
+        " re-delete our original buffer
         exec "bd " . l:bufnr
     endif
 endfunction
@@ -233,13 +248,14 @@ vnoremap <C-H> "hy:exec 'call FindAndReplace("' . escape(escape(@h, '"\'), '"\/'
 " Plugins
 "
 
-" delimit helpers
-let g:delimitMate_expand_cr = 1
-
 " edit the snippets file for the current filetype
 noremap  <C-F2>      :exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 inoremap <C-F2> <C-O>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
 vnoremap <C-F2> <C-C>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
+
+" mini buffer explorer
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplCheckDupeBufs     = 0
 
 " filetype switching
 augroup SourceHeaderPairs
@@ -251,6 +267,9 @@ augroup end
 noremap  <C-F10>      :FSHere<CR>
 inoremap <C-F10> <C-O>:FSHere<CR>
 vnoremap <C-F10> <C-C>:FSHere<CR>
+
+" delimit helpers
+let g:delimitMate_expand_cr = 1
 
 " commenting
 let g:NERDCreateDefaultMappings = 0
@@ -268,13 +287,21 @@ snoremap <silent> <C-J> <C-C>:call NERDComment("x", "uncomment")<CR>gv<C-G>
 
 let g:loaded_comment = 1
 
+" tab alignment
+function! TabAlign(arg)
+    let l:cursor = getpos('.')
+    exec "Tabularize " . a:arg
+    call setpos('.', l:cursor)
+endfunction
+
+noremap  <silent> <Leader>a=      :call TabAlign('/=')<CR>
+inoremap <silent> <Leader>a= <C-O>:call TabAlign('/=')<CR>
+noremap  <silent> <Leader>a:      :call TabAlign('/:\zs/l0l1')<CR>
+inoremap <silent> <Leader>a: <C-O>:call TabAlign('/:\zs/l0l1')<CR>
+
 " conque
 noremap  <C-Space>      :ConqueTerm cmd<CR>
 inoremap <C-Space> <C-O>:ConqueTerm cmd<CR>
-
-" mini buffer explorer
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplCheckDupeBufs     = 0
 
 " let g:miniBufExplorerDebugLevel = 10 " MBE reports everything
 " let g:miniBufExplorerDebugMode  = 0  " Errors will show up in 
