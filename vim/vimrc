@@ -225,9 +225,7 @@ xnoremap <S-K> <S-PageUp>
 
 function! FindAndReplace(highlight)
     if matchstr(a:highlight, "\n") != ""
-        " this should work, but vim doesn't like the `s
-        " let @h = "`<,`>s//"
-        let @h = '%s/\%V/'
+        let @h = "'<,'>s//"
     else
         let @h = "%s/" . escape(a:highlight, "./") . "//"
     endif
@@ -285,9 +283,9 @@ snoremap <silent> <C-J> <C-C>:call NERDComment("x", "uncomment")<CR>gv<C-G>
 let g:loaded_comment = 1
 
 " tab alignment
-function! TabAlign(arg)
+function! TabAlign(arg) range
     let l:cursor = getpos('.')
-    exec "Tabularize " . a:arg
+    exec a:firstline . "," . a:lastline . "Tabularize " . a:arg
     call setpos('.', l:cursor)
 endfunction
 
