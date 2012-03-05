@@ -3,6 +3,8 @@
 " Source Depot
 "
 
+let s:ignoreChange = 0
+
 " run an sd command
 function! SdExe(cmd)
     silent exec "!start /min sd.exe " . a:cmd
@@ -10,6 +12,7 @@ endfunction
 
 " edit the current file
 function! SdEdit()
+    let s:ignoreChange = 1
     call SdExe("edit " . expand("%"))
 endfunction
 
@@ -24,6 +27,25 @@ inoremap <silent> <C-F11> <C-O>:call SdEdit()<CR>
 
 noremap  <silent> <C-F12>      :call SdRevert()<CR>
 inoremap <silent> <C-F12> <C-O>:call SdRevert()<CR>
+
+" automatically attempt to check out read-only files
+function! OnFileChangedRO()
+    call SdEdit()
+    set noreadonly
+endfunction
+
+autocmd FileChangedRO * call OnFileChangedRO()
+
+function! OnFileChangedShell()
+    if s:ignoreChange == 1
+        let v:fcs_choice   = 0
+        let s:ignoreChange = 0
+    else
+        let v:fcs_choice="ask"
+    endif
+endfunction
+
+autocmd FileChangedShell * call OnFileChangedShell()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Source Search
