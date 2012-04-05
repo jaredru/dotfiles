@@ -61,9 +61,9 @@ endif
 "
 
 " copy indent from current line when starting a new line
-" except in cases like following a {
+" and use per-filetype indentation rules
 set autoindent
-set smartindent
+filetype indent on
 
 " smartindent does weird things with #
 inoremap # X#
@@ -293,6 +293,8 @@ noremap  <silent> <Leader>a=      :call TabAlign('/=')<CR>
 inoremap <silent> <Leader>a= <C-O>:call TabAlign('/=')<CR>
 noremap  <silent> <Leader>a:      :call TabAlign('/:\zs/l0l1')<CR>
 inoremap <silent> <Leader>a: <C-O>:call TabAlign('/:\zs/l0l1')<CR>
+noremap  <silent> <Leader>a,      :call TabAlign('/,\zs/l0l1')<CR>
+inoremap <silent> <Leader>a, <C-O>:call TabAlign('/,\zs/l0l1')<CR>
 
 " conque
 noremap  <C-Space>      :ConqueTerm cmd<CR>
