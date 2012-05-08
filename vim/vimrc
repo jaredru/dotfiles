@@ -47,9 +47,7 @@ set guifont=Consolas:h9
 
 " set the default color scheme
 set background=dark
-" let g:solarized_contrast="high"
 colorscheme solarized
-" colorscheme jColor
 
 " set console colors
 if !has("gui_running")
@@ -162,14 +160,18 @@ set autochdir
 " comma leader is much more handy
 let mapleader=','
 
-" edit this file
-noremap  <C-F1>      :e ~/vimfiles/vimrc<CR>
-inoremap <C-F1> <C-O>:e ~/vimfiles/vimrc<CR>
-vnoremap <C-F1> <C-C>:e ~/vimfiles/vimrc<CR>
+" automatically map various states properly
+function! MultiMap(lhs, rhs)
+    exec "noremap  <silent>" . a:lhs . "      " . a:rhs
+    exec "inoremap <silent>" . a:lhs . " <C-O>" . a:rhs
+    exec "vnoremap <silent>" . a:lhs . " <C-C>" . a:rhs . "gv"
+endfunction
 
-" when text is selected, tab and shift-tab should indent
-vnoremap > >gv
-vnoremap < <gv
+" edit this file
+call MultiMap("<C-F1>", ":e ~/vimfiles/vimrc<CR>")
+
+" enable/disable hlsearch
+call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
 
 " ctrl+w should close the buffer
 function! DeleteCurrentBuffer()
@@ -183,7 +185,7 @@ function! DeleteCurrentBuffer()
     " if we're still in the same window, make sure we went to the right buffer
     if winnr("$") == l:winnr
         " reload the old buffer, and go to the next buffer
-        exec "b  " . l:bufnr
+        exec "b " . l:bufnr
         bn
 
         " if we circled around to the beginning, go back
@@ -196,8 +198,11 @@ function! DeleteCurrentBuffer()
     endif
 endfunction
 
-noremap  <Leader>w      :call DeleteCurrentBuffer()<CR>
-inoremap <Leader>w <ESC>:call DeleteCurrentBuffer()<CR>
+call MultiMap("<Leader>w", ":call DeleteCurrentBuffer()<CR>")
+
+" when text is selected, tab and shift-tab should indent
+vnoremap > >gv
+vnoremap < <gv
 
 " ctrl+left and ctrl+right should do the right thing in normal mode
 noremap  <C-LEFT>  b
@@ -223,34 +228,36 @@ xnoremap <S-K> <S-PageUp>
 " Find & Replace
 "
 
-function! FindAndReplace(highlight)
-    if matchstr(a:highlight, "\n") != ""
-        let @h = "'<,'>s//"
+function! FindAndReplace()
+    normal gv"hy
+
+    if @h =~ "\n"
+        return "'<,'>s//"
     else
-        let @h = "%s/" . escape(a:highlight, "./") . "//"
+        return "%s/" . escape(@h, '"\/') . "//"
     endif
 endfunction
 
 noremap  <C-H>      :%s/<C-R><C-W>//<Left>
 inoremap <C-H> <C-O>:%s/<C-R><C-W>//<Left>
-vnoremap <C-H> "hy:exec 'call FindAndReplace("' . escape(escape(@h, '"\'), '"\/') . '")'<CR>:<C-R>h<Left>
+vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 "
 
-" edit the snippets file for the current filetype
-noremap  <C-F2>      :exec "edit " . snippets_dir . &ft . ".snippets"<CR>
-inoremap <C-F2> <C-O>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
-vnoremap <C-F2> <C-C>:exec "edit " . snippets_dir . &ft . ".snippets"<CR>
-
 " mini buffer explorer
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplCheckDupeBufs     = 0
 
+" edit the snippets file for the current filetype
+call MultiMap("<C-F2>", ':exec "edit " . snippets_dir . &ft . ".snippets"')
+
 " filelist
-noremap  <silent> <Leader>f      :FileList<CR>
-inoremap <silent> <Leader>f <C-O>:FileList<CR>
+call MultiMap("<Leader>f", ":FileList<CR>")
+
+" conque
+call MultiMap("<C-Space>", ":ConqueTerm cmd<CR>")
 
 " filetype switching
 augroup SourceHeaderPairs
@@ -259,9 +266,7 @@ augroup SourceHeaderPairs
     autocmd BufEnter *                    let b:fswitchlocs = "./"
 augroup end
 
-noremap  <C-F10>      :FSHere<CR>
-inoremap <C-F10> <C-O>:FSHere<CR>
-vnoremap <C-F10> <C-C>:FSHere<CR>
+call MultiMap("<C-F10>", ":FSHere<CR>")
 
 " delimit helpers
 let g:delimitMate_expand_cr = 1
@@ -273,12 +278,10 @@ let g:NERDSpaceDelims           = 1
 noremap  <silent> <C-K>      :call NERDComment("n", "alignBoth")<CR>
 inoremap <silent> <C-K> <C-O>:call NERDComment("n", "alignBoth")<CR>
 xnoremap <silent> <C-K> <C-C>:call NERDComment("x", "alignBoth")<CR>gv
-snoremap <silent> <C-K> <C-C>:call NERDComment("x", "alignBoth")<CR>gv<C-G>
 
 noremap  <silent> <C-J>      :call NERDComment("n", "uncomment")<CR>
 inoremap <silent> <C-J> <C-O>:call NERDComment("n", "uncomment")<CR>
 xnoremap <silent> <C-J> <C-C>:call NERDComment("x", "uncomment")<CR>gv
-snoremap <silent> <C-J> <C-C>:call NERDComment("x", "uncomment")<CR>gv<C-G>
 
 let g:loaded_comment = 1
 
@@ -295,13 +298,6 @@ noremap  <silent> <Leader>a:      :call TabAlign('/:\zs/l0l1')<CR>
 inoremap <silent> <Leader>a: <C-O>:call TabAlign('/:\zs/l0l1')<CR>
 noremap  <silent> <Leader>a,      :call TabAlign('/,\zs/l0l1')<CR>
 inoremap <silent> <Leader>a, <C-O>:call TabAlign('/,\zs/l0l1')<CR>
-
-" conque
-noremap  <C-Space>      :ConqueTerm cmd<CR>
-inoremap <C-Space> <C-O>:ConqueTerm cmd<CR>
-
-" let g:miniBufExplorerDebugLevel = 10 " MBE reports everything
-" let g:miniBufExplorerDebugMode  = 0  " Errors will show up in 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
