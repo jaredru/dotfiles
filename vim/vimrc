@@ -271,20 +271,6 @@ call MultiMap("<C-F10>", ":FSHere<CR>")
 " delimit helpers
 let g:delimitMate_expand_cr = 1
 
-" commenting
-let g:NERDCreateDefaultMappings = 0
-let g:NERDSpaceDelims           = 1
-
-noremap  <silent> <C-K>      :call NERDComment("n", "alignBoth")<CR>
-inoremap <silent> <C-K> <C-O>:call NERDComment("n", "alignBoth")<CR>
-xnoremap <silent> <C-K> <C-C>:call NERDComment("x", "alignBoth")<CR>gv
-
-noremap  <silent> <C-J>      :call NERDComment("n", "uncomment")<CR>
-inoremap <silent> <C-J> <C-O>:call NERDComment("n", "uncomment")<CR>
-xnoremap <silent> <C-J> <C-C>:call NERDComment("x", "uncomment")<CR>gv
-
-let g:loaded_comment = 1
-
 " tab alignment
 function! TabAlign(arg) range
     let l:cursor = getpos('.')
