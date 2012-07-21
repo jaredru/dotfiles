@@ -168,7 +168,7 @@ function! MultiMap(lhs, rhs)
 endfunction
 
 " edit this file
-call MultiMap("<C-F1>", ":e ~/vimfiles/vimrc<CR>")
+call MultiMap("<C-F1>", ":e " . expand("%:p"))
 
 " enable/disable hlsearch
 call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
@@ -251,7 +251,16 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplCheckDupeBufs     = 0
 
 " edit the snippets file for the current filetype
-call MultiMap("<C-F2>", ':exec "edit " . snippets_dir . &ft . ".snippets"')
+function! EditSnippets()
+    let dirs  = substitute(g:snippets_dir, '\', '/', 'g')
+    let files = findfile(&ft . ".snippets", dirs, -1)
+
+    for file in files
+        exec 'edit ' . file
+    endfor
+endfunction
+
+call MultiMap("<C-F2>", ':call EditSnippets()<CR>')
 
 " filelist
 call MultiMap("<Leader>f", ":FileList<CR>")
@@ -270,6 +279,7 @@ call MultiMap("<C-F10>", ":FSHere<CR>")
 
 " delimit helpers
 let g:delimitMate_expand_cr = 1
+let g:loaded_delimitMate = 1
 
 " tab alignment
 function! TabAlign(arg) range
