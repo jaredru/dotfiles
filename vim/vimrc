@@ -168,7 +168,7 @@ function! MultiMap(lhs, rhs)
 endfunction
 
 " edit this file
-call MultiMap("<C-F1>", ":e " . expand("%:p"))
+call MultiMap("<C-F1>", ":e " . expand("<sfile>:p") . "<CR>")
 
 " enable/disable hlsearch
 call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
