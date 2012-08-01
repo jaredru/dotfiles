@@ -175,27 +175,19 @@ call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
 
 " ctrl+w should close the buffer
 function! DeleteCurrentBuffer()
-    " get the current window and buffer
+    " get the current buffer
     let l:bufnr = bufnr("%")
-    let l:winnr = winnr("$")
+
+    " go to the next buffer
+    bn
+
+    " if we circled around to the beginning, go back
+    if bufnr("%") < l:bufnr
+        2bp
+    endif
 
     " delete the buffer
-    bd
-
-    " if we're still in the same window, make sure we went to the right buffer
-    if winnr("$") == l:winnr
-        " reload the old buffer, and go to the next buffer
-        exec "b " . l:bufnr
-        bn
-
-        " if we circled around to the beginning, go back
-        if bufnr("%") < l:bufnr
-            bp
-        endif
-
-        " re-delete our original buffer
-        exec "bd " . l:bufnr
-    endif
+    exec "bd " . l:bufnr
 endfunction
 
 call MultiMap("<Leader>w", ":call DeleteCurrentBuffer()<CR>")
