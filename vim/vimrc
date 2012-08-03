@@ -88,6 +88,9 @@ set nowrap
 " show line numbers
 set number
 
+" folding is awful
+set nofoldenable
+
 " show tabs and trailing spaces
 set listchars=tab:»·,trail:•
 set list
@@ -174,23 +177,7 @@ call MultiMap("<C-F1>", ":e " . expand("<sfile>:p") . "<CR>")
 call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
 
 " ctrl+w should close the buffer
-function! DeleteCurrentBuffer()
-    " get the current buffer
-    let l:bufnr = bufnr("%")
-
-    " go to the next buffer
-    bn
-
-    " if we circled around to the beginning, go back
-    if bufnr("%") < l:bufnr
-        2bp
-    endif
-
-    " delete the buffer
-    exec "bd " . l:bufnr
-endfunction
-
-call MultiMap("<Leader>w", ":call DeleteCurrentBuffer()<CR>")
+call MultiMap("<Leader>w", ":bd<CR>")
 
 " when text is selected, tab and shift-tab should indent
 vnoremap > >gv
