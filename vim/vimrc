@@ -29,8 +29,10 @@ call pathogen#infect()
 "
 
 " use my screen real estate
-set lines=60
-set columns=120
+if !exists("loaded_vimrc")
+    set lines=60
+    set columns=120
+endif
 
 " minimize the gui
 set guioptions=r
@@ -49,11 +51,6 @@ set guifont=Consolas:h9
 set background=dark
 colorscheme solarized
 
-" set console colors
-if !has("gui_running")
-    colorscheme default
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs
 "
@@ -63,7 +60,7 @@ endif
 set autoindent
 filetype indent on
 
-" smartindent does weird things with #
+" filetype indent does weird things with #
 inoremap # X#
 
 " tabs are 4 spaces
@@ -106,7 +103,7 @@ set lazyredraw
 
 " change the default status line
 " and always display it
-set statusline=%t\ [%Y%M%R]\ CWD=%{getcwd()}%=%-14.(Line:\%l/%L%)\ %-7.(Col:%3c%)
+set statusline=%t\ [%Y%M%R]\ CWD=%{getcwd()}%=Line:\ %l/%L%9(Col:\ %02c%)
 set laststatus=2
 
 " show matches for command completion
@@ -183,6 +180,11 @@ call MultiMap("<Leader>w", ":bd<CR>")
 vnoremap > >gv
 vnoremap < <gv
 
+" visual paste should delete to the black hole register first so we don't
+" overwrite the unnamed register
+vnoremap p "_dp
+vnoremap P "_dP
+
 " ctrl+left and ctrl+right should do the right thing in normal mode
 noremap  <C-LEFT>  b
 noremap  <C-RIGHT> e
@@ -224,10 +226,6 @@ vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 "
-
-" mini buffer explorer
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplCheckDupeBufs     = 0
 
 " edit the snippets file for the current filetype
 function! EditSnippets()
@@ -299,4 +297,6 @@ autocmd FileType * set formatoptions-=r
 if filereadable($HOME . "/work.vim")
     source $HOME/work.vim
 endif
+
+let g:loaded_vimrc = 1
 
