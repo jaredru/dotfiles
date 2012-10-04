@@ -265,12 +265,14 @@ function! TabAlign(arg) range
     call setpos('.', l:cursor)
 endfunction
 
-noremap  <silent> <Leader>a=      :call TabAlign('/=')<CR>
-inoremap <silent> <Leader>a= <C-O>:call TabAlign('/=')<CR>
-noremap  <silent> <Leader>a:      :call TabAlign('/:\zs/l0l1')<CR>
-inoremap <silent> <Leader>a: <C-O>:call TabAlign('/:\zs/l0l1')<CR>
-noremap  <silent> <Leader>a,      :call TabAlign('/,\zs/l0l1')<CR>
-inoremap <silent> <Leader>a, <C-O>:call TabAlign('/,\zs/l0l1')<CR>
+noremap  <silent> <Leader>a=            :call TabAlign('/=')<CR>
+inoremap <silent> <Leader>a=       <C-O>:call TabAlign('/=')<CR>
+noremap  <silent> <Leader>a:            :call TabAlign('/:\zs/l0l1')<CR>
+inoremap <silent> <Leader>a:       <C-O>:call TabAlign('/:\zs/l0l1')<CR>
+noremap  <silent> <Leader>a,            :call TabAlign('/,\zs/l0l1')<CR>
+inoremap <silent> <Leader>a,       <C-O>:call TabAlign('/,\zs/l0l1')<CR>
+noremap  <silent> <Leader>a<Space>      :call TabAlign('/\>/l0l1')<CR>
+inoremap <silent> <Leader>a<Space> <C-O>:call TabAlign('/\>/l0l1')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
