@@ -5,9 +5,16 @@
 
 let s:ignoreChange = 0
 
+" effectively just map :exec to a function.  this will allow "--remote-expr"
+" to run ex commands.
+function! Exec(cmd)
+    exec a:cmd
+endfunction
+
 " run an sd command
 function! SdExe(cmd)
-    silent exec "!start /min sd.exe " . a:cmd
+    let l:refreshCmd = " & vim.exe --servername " . v:servername . " --remote-expr \"Exec('checktime')\""
+    silent exec "!start /min cmd /c sd.exe " . a:cmd . l:refreshCmd
 endfunction
 
 " edit the current file
