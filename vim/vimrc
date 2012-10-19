@@ -258,6 +258,9 @@ call MultiMap("<C-F10>", ":FSHere<CR>")
 let g:delimitMate_expand_cr = 1
 let g:loaded_delimitMate = 1
 
+" supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " tab alignment
 function! TabAlign(arg) range
     let l:cursor = getpos('.')
