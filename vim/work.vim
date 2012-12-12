@@ -75,6 +75,6 @@ inoremap <silent>  <C-O>:call SourceSearch(expand("<cword>"))<CR>
 "
 
 " filelist
-let g:FileList_IndexFile = $INETROOT . "/filetags"
-let g:FileList_MaxToShow = 72
+let g:FileList_NamedIndex             = $INETROOT . "/filetags"
+let g:FileList_CacheGenerationCommand = 'node ' . $_ntdeveloper . '\vimtags.js {dir} {out}'
 
