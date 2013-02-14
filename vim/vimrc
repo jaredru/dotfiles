@@ -227,17 +227,14 @@ vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
 " Plugins
 "
 
-" edit the snippets file for the current filetype
-function! EditSnippets()
-    let dirs  = substitute(g:snippets_dir, '\', '/', 'g')
-    let files = findfile(&ft . ".snippets", dirs, -1)
+" ultisnips
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-    for file in files
-        exec 'edit ' . file
-    endfor
-endfunction
+let g:UltiSnipsSnippetsDir = expand("<sfile>:p:h") . "/bundle/snippets/UltiSnips"
+call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
 
-call MultiMap("<C-F2>", ':call EditSnippets()<CR>')
 
 " filelist
 call MultiMap("<Leader>f", ":FileList<CR>")
