@@ -28,24 +28,26 @@ call pathogen#infect()
 " GUI
 "
 
-" use my screen real estate
-if !exists("loaded_vimrc")
-    set lines=60
-    set columns=120
+if has("gui")
+    " use my screen real estate
+    if !exists("loaded_vimrc")
+        set lines=60
+        set columns=120
+    endif
+
+    " use a better font
+    set guifont=Consolas:h9
+
+    " minimize the gui
+    set guioptions=r
 endif
 
-" minimize the gui
-set guioptions=r
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Fonts & Colors
+" Colors
 "
 
 " turn on syntax highlighting
 syntax on
-
-" use a better font
-set guifont=Consolas:h9
 
 " set the default color scheme
 set background=dark
