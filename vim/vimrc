@@ -302,3 +302,4 @@ endif
 
 let g:loaded_vimrc = 1
 
+" vim:ft=vim:ff=unix

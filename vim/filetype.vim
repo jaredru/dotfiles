@@ -15,3 +15,4 @@ augroup Filetypes
     autocmd! BufNewFile,BufRead *.settings,*.targets,*.wwaproj setfiletype xml
 augroup END
 
+" vim:ft=vim:ff=unix
