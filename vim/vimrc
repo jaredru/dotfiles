@@ -36,7 +36,11 @@ if has("gui")
     endif
 
     " use a better font
-    set guifont=Consolas:h9
+    if has("win32")
+        set guifont=Consolas:h9
+    elseif has("mac")
+        set guifont=Monaco:h11
+    endif
 
     " minimize the gui
     set guioptions=r
@@ -91,7 +95,7 @@ set number
 set nofoldenable
 
 " show tabs and trailing spaces
-set listchars=tab:»·,trail:•
+set listchars=tab:Â»Â·,trail:â€¢
 set list
 
 " flash matched parentheses, brackets, and braces
