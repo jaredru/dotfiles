@@ -6,6 +6,9 @@
 " behave less like vi (i.e. more vim features)
 set nocompatible
 
+" use a better default encoding
+set encoding=utf-8
+
 " behave like windows instead of xterm
 source $VIMRUNTIME/mswin.vim
 
