@@ -297,6 +297,19 @@ function! RestorePosition()
     endif
 endfunction
 
+" for windows, if the file is a symbolic link, set backupcopy to yes
+if has("win32")
+    autocmd BufReadPost * call HandleSymLinksOnWindows()
+    function! HandleSymLinksOnWindows()
+        let l:dir = system("dir " . expand("<afile>"))
+
+        if (match(l:dir, "SYMLINK") != -1)
+            echoerr "it worked!"
+            set backupcopy=yes
+        endif
+    endfunction
+endif
+
 " override vim's default ftplugins for indenting our text
 autocmd FileType * set formatoptions-=o
 autocmd FileType * set formatoptions-=r
