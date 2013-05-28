@@ -304,7 +304,6 @@ if has("win32")
         let l:dir = system("dir " . expand("<afile>"))
 
         if (match(l:dir, "SYMLINK") != -1)
-            echoerr "it worked!"
             set backupcopy=yes
         endif
     endfunction
