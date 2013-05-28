@@ -1,0 +1,42 @@
+[submodule "bundle/bufflist"]
+	path = bundle/bufflist
+	url = https://bitbucket.org/fouvrai/vim-bufflist.git
+[submodule "bundle/commenter"]
+	path = bundle/commenter
+	url = https://bitbucket.org/fouvrai/vim-commenter.git
+[submodule "bundle/delimitMate"]
+	path = bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "bundle/easymotion"]
+	path = bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "bundle/filelist"]
+	path = bundle/filelist
+	url = https://bitbucket.org/fouvrai/vim-filelist.git
+[submodule "bundle/javascript-indent"]
+	path = bundle/javascript-indent
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "bundle/pathogen"]
+	path = bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "bundle/powershell-syntax"]
+	path = bundle/powershell-syntax
+	url = https://github.com/PProvost/vim-ps1.git
+[submodule "bundle/snippets"]
+	path = bundle/snippets
+	url = https://bitbucket.org/fouvrai/ultisnips-snippets
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/solarized"]
+	path = bundle/solarized
+	url = https://github.com/fouvrai/vim-solarized.git
