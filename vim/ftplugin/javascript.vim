@@ -83,3 +83,4 @@ endfunction
 
 inoremap . .<C-R>=ShowJsensePopup()<CR>
 
+" vim:ft=vim:ff=unix
