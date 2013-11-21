@@ -20,12 +20,15 @@ set directory+=$TEMP
 filetype plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Pathogen
+" Vundle
 "
 
-" set up pathogen runtime path manipulation
-runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#infect()
+" set up vundle runtime path manipulation
+set runtimepath+=bundle/vundle/
+call vundle#rc()
+
+" for some reason vundle fails to handle solarized correctly
+set runtimepath+=bundle/vim-solarized/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
@@ -236,6 +239,24 @@ vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
 " Plugins
 "
 
+Bundle "gmarik/vundle"
+
+Bundle "Raimondi/delimitMate"
+Bundle "scrooloose/nerdtree"
+Bundle "ervandew/supertab"
+Bundle "godlygeek/tabular"
+Bundle "SirVer/ultisnips"
+Bundle "Lokaltog/vim-easymotion"
+Bundle "pangloss/vim-javascript"
+Bundle "PProvost/vim-ps1"
+Bundle "fouvrai/vim-solarized"
+Bundle "tpope/vim-surround"
+
+Bundle "https://bitbucket.org/fouvrai/vim-bufflist.git"
+Bundle "https://bitbucket.org/fouvrai/vim-filelist.git"
+Bundle "https://bitbucket.org/fouvrai/vim-commenter.git"
+Bundle "https://bitbucket.org/fouvrai/ultisnips-snippets.git"
+
 " ultisnips
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
@@ -243,7 +264,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 let g:UltiSnipsSnippetsDir = expand("<sfile>:p:h") . "/bundle/snippets/UltiSnips"
 call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
-
 
 " filelist
 call MultiMap("<Leader>f", ":FileList<CR>")
