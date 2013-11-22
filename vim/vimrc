@@ -24,11 +24,11 @@ filetype plugin on
 "
 
 " set up vundle runtime path manipulation
-set runtimepath+=bundle/vundle/
+let &runtimepath .= "," . expand("<sfile>:p:h") . "/bundle/vundle/"
 call vundle#rc()
 
 " for some reason vundle fails to handle solarized correctly
-set runtimepath+=bundle/vim-solarized/
+let &runtimepath .= "," . expand("<sfile>:p:h") . "/bundle/vim-solarized/"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
