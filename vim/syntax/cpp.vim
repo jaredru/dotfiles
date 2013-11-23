@@ -106,3 +106,4 @@ syn keyword Function sizeof
 syn keyword Type     interface
 syn keyword Todo     BUGBUG
 
+" vim:ft=vim:ff=unix
