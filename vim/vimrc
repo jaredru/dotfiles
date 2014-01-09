@@ -24,10 +24,10 @@ filetype plugin on
 "
 
 " set up vundle runtime path manipulation
-let &runtimepath .= "," . expand("<sfile>:p:h") . "/bundle/vundle/"
-call vundle#rc()
+let &runtimepath .= "," . expand("<sfile>:p:h") . "/bundle/neobundle/"
+call neobundle#rc()
 
-" for some reason vundle fails to handle solarized correctly
+" for some reason neobundle fails to handle solarized correctly
 let &runtimepath .= "," . expand("<sfile>:p:h") . "/bundle/vim-solarized/"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -46,6 +46,7 @@ if has("gui")
         set guifont=Consolas:h9
     elseif has("mac")
         set guifont=Monaco:h11
+        macmenu File.Close key=<nop>
     endif
 
     " minimize the gui
@@ -239,23 +240,23 @@ vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
 " Plugins
 "
 
-Bundle "gmarik/vundle"
+NeoBundleFetch "Shougo/neobundle.vim", { 'name': 'neobundle' }
 
-Bundle "Raimondi/delimitMate"
-Bundle "scrooloose/nerdtree"
-Bundle "ervandew/supertab"
-Bundle "godlygeek/tabular"
-Bundle "SirVer/ultisnips"
-Bundle "Lokaltog/vim-easymotion"
-Bundle "pangloss/vim-javascript"
-Bundle "PProvost/vim-ps1"
-Bundle "fouvrai/vim-solarized"
-Bundle "tpope/vim-surround"
+NeoBundle "Raimondi/delimitMate"
+NeoBundle "scrooloose/nerdtree"
+NeoBundle "ervandew/supertab"
+NeoBundle "godlygeek/tabular"
+NeoBundle "SirVer/ultisnips"
+NeoBundle "Lokaltog/vim-easymotion"
+NeoBundle "pangloss/vim-javascript"
+NeoBundle "PProvost/vim-ps1"
+NeoBundle "fouvrai/vim-solarized"
+NeoBundle "tpope/vim-surround"
 
-Bundle "https://bitbucket.org/fouvrai/vim-bufflist.git"
-Bundle "https://bitbucket.org/fouvrai/vim-filelist.git"
-Bundle "https://bitbucket.org/fouvrai/vim-commenter.git"
-Bundle "https://bitbucket.org/fouvrai/ultisnips-snippets.git"
+NeoBundle "https://bitbucket.org/fouvrai/vim-bufflist.git"
+NeoBundle "https://bitbucket.org/fouvrai/vim-filelist.git"
+NeoBundle "https://bitbucket.org/fouvrai/vim-commenter.git"
+NeoBundle "https://bitbucket.org/fouvrai/ultisnips-snippets.git"
 
 " ultisnips
 let g:UltiSnipsExpandTrigger       = "<tab>"
