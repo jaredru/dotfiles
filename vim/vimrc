@@ -20,15 +20,28 @@ set directory+=$TEMP
 filetype plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
+" Plug
 "
 
-" set up vundle runtime path manipulation
-let &runtimepath .= "," . expand("<sfile>:p:h") . "/bundle/neobundle/"
-call neobundle#rc()
+call plug#begin('~/.vim/plugged')
 
-" for some reason neobundle fails to handle solarized correctly
-let &runtimepath .= "," . expand("<sfile>:p:h") . "/bundle/vim-solarized/"
+Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdtree'
+Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+Plug 'SirVer/ultisnips'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'pangloss/vim-javascript'
+Plug 'PProvost/vim-ps1'
+Plug 'fouvrai/vim-solarized'
+Plug 'tpope/vim-surround'
+
+Plug 'https://bitbucket.org/fouvrai/vim-bufflist.git'
+Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
+Plug 'https://bitbucket.org/fouvrai/vim-commenter.git'
+Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
+
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
@@ -239,24 +252,6 @@ vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 "
-
-NeoBundleFetch "Shougo/neobundle.vim", { 'name': 'neobundle' }
-
-NeoBundle "Raimondi/delimitMate"
-NeoBundle "scrooloose/nerdtree"
-NeoBundle "ervandew/supertab"
-NeoBundle "godlygeek/tabular"
-NeoBundle "SirVer/ultisnips"
-NeoBundle "Lokaltog/vim-easymotion"
-NeoBundle "pangloss/vim-javascript"
-NeoBundle "PProvost/vim-ps1"
-NeoBundle "fouvrai/vim-solarized"
-NeoBundle "tpope/vim-surround"
-
-NeoBundle "https://bitbucket.org/fouvrai/vim-bufflist.git"
-NeoBundle "https://bitbucket.org/fouvrai/vim-filelist.git"
-NeoBundle "https://bitbucket.org/fouvrai/vim-commenter.git"
-NeoBundle "https://bitbucket.org/fouvrai/ultisnips-snippets.git"
 
 " ultisnips
 let g:UltiSnipsExpandTrigger       = "<tab>"
