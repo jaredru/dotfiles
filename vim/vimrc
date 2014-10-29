@@ -25,6 +25,7 @@ filetype plugin on
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'fouvrai/base16-vim'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
@@ -75,7 +76,7 @@ syntax on
 
 " set the default color scheme
 set background=dark
-colorscheme solarized
+colorscheme base16-twilight
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs
@@ -230,6 +231,30 @@ nnoremap <S-K> <PageUp>
 
 xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntax Highlighting
+"
+
+function! s:ShowSyntaxGroups()
+    let l:id    = synID(line('.'), col('.'), 0)
+    let l:names = []
+
+    while 1
+        call add(l:names, synIDattr(l:id, 'name'))
+        let l:next = synIDtrans(l:id)
+
+        if l:next != l:id
+            let l:id = l:next
+        else
+            break
+        endif
+    endwhile
+
+    echo join(l:names, ' -> ')
+endfunction
+
+noremap <Leader>sg :call <SID>ShowSyntaxGroups()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Find & Replace
