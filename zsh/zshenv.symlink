@@ -1,0 +1,7 @@
+
+# set our default xdg config path, but only if it's not already set
+[[ -z $XDG_CONFIG_HOME ]] && export XDG_CONFIG_HOME="$HOME/.config"
+
+# point our zsh dotfiles path to our xdg path
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+

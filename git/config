@@ -1,0 +1,57 @@
+
+[user]
+    name  = Jared Russell
+    email = me@jaredrussell.com
+[help]
+    format = html
+[core]
+    editor = mvim -f
+[push]
+    default = simple
+[pull]
+    rebase = preserve
+
+
+
+[alias]
+    lg  = log --graph --format=format:'%C(blue)%h %Creset%an %C(green)(%ar) %C(yellow)%d%n        %Creset%s%n' --abbrev-commit
+    lga = log --graph --format=format:'%C(blue)%h %Creset%an %C(green)(%ar) %C(yellow)%d%n        %Creset%s%n' --abbrev-commit --all
+
+    stat = status --short --branch
+    out  = checkout
+
+    d  = diff
+    dc = diff --cached
+
+    dt  = difftool
+    dtc = difftool --cached
+
+    mt = mergetool
+
+
+
+[credential]
+    helper = osxkeychain
+
+
+
+[difftool]
+    prompt = false
+[difftool "Kaleidoscope"]
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+    tool = Kaleidoscope
+
+[mergetool]
+    prompt = false
+    keepBackup = false
+[mergetool "Kaleidoscope"]
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustExitCode = true
+[merge]
+    tool = Kaleidoscope
+
+[filter "media"]
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
+

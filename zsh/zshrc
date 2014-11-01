@@ -1,0 +1,87 @@
+
+#
+# Config
+#
+
+# get all .zsh files in our config path
+config_files=($XDG_CONFIG_HOME/**/*.zsh)
+
+# but filter out antigen files, as they'll be handled by antigen itself
+config_files=(${config_files:#$XDG_CONFIG_HOME/antigen/*})
+
+# source them all
+for file in $config_files; do
+    source $file
+done
+
+# we no longer need the variable
+unset config_files
+
+#
+# Local
+#
+
+# source a local zshrc for private/untracked stuff
+local_zshrc=~/.zshrc
+[[ -a $local_zshrc ]] && source $local_zshrc
+unset local_zshrc
+
+#
+# Plugins
+#
+
+export ADOTDIR=$XDG_CONFIG_HOME/antigen
+
+antigen bundle fouvrai/zsh-pure
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen apply
+
+#
+# Profile
+#
+
+# it'd be nice if there was a way to close around this.
+# i don't honestly need it set forever.
+profile=$0
+
+profile-edit() {
+    $EDITOR $profile
+}
+
+profile-reload() {
+    source $profile
+}
+
+alias profile="profile-edit"
+alias reload="profile-reload"
+
+#
+# Options
+#
+
+# better color switching
+# https://wiki.archlinux.org/index.php/zsh#Colors
+autoload -Uz colors && colors
+
+#  # load better tab completion support
+#  autoload -Uz compinit
+#  compinit
+
+# i used to have this set.  i'm honestly not sure what it does, and
+# i don't feel like looking it up right now.
+#  setopt no_case_glob
+
+# be case insensitive
+# i need to read into this more, but the second bit (r:...) matches within filenames as well
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# use an interactive menu
+zstyle ":completion:*" menu select
+
+# complete the first result by default
+setopt menu_complete
+
+# <S-TAB> goes backwards
+bindkey "\e[Z" reverse-menu-complete
+
