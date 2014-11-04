@@ -32,6 +32,7 @@ unset local_zshrc
 
 export ADOTDIR=$XDG_CONFIG_HOME/antigen
 
+antigen bundle fouvrai/zsh-polka
 antigen bundle fouvrai/zsh-pure
 antigen bundle zsh-users/zsh-syntax-highlighting
 
