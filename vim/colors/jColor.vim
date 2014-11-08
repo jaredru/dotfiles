@@ -1,6 +1,8 @@
 "
-" Jared's Color Scheme
+" Jared's (Super Old) Color Scheme
 "
+
+let g:colors_name = "jColor"
 
 set background=dark
 hi clear

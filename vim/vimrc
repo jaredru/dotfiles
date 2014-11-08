@@ -9,15 +9,9 @@ set nocompatible
 " use a better default encoding
 set encoding=utf-8
 
-" behave like windows instead of xterm
-source $VIMRUNTIME/mswin.vim
-
 " don't dump swap files in cwd
 set directory-=.
 set directory+=$TEMP
-
-" load filetype plugins
-filetype plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plug
@@ -26,21 +20,27 @@ filetype plugin on
 call plug#begin('~/.vim/plugged')
 
 Plug 'fouvrai/base16-vim'
-Plug 'Raimondi/delimitMate'
-Plug 'scrooloose/nerdtree'
+Plug 'fouvrai/lightline.vim'
 Plug 'ervandew/supertab'
-Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips'
+Plug 'junegunn/vim-easy-align'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'pangloss/vim-javascript'
-Plug 'PProvost/vim-ps1'
-Plug 'fouvrai/vim-solarized'
+Plug 'derekwyatt/vim-fswitch',  { 'on': 'FSHere' }
+Plug 'tpope/vim-fugitive'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'PProvost/vim-ps1',        { 'for': 'ps1' }
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
 
-Plug 'https://bitbucket.org/fouvrai/vim-bufflist.git'
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
 Plug 'https://bitbucket.org/fouvrai/vim-commenter.git'
 Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
+
+" interesting things that i'm not actively using
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'chrisbra/NrrwRgn'
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
@@ -59,7 +59,7 @@ if has("gui")
     if has("win32")
         set guifont=Consolas:h9
     elseif has("mac")
-        set guifont=Monaco:h11
+        set guifont=Meslo\ LG\ S\ for\ Powerline:h11
         macmenu File.Close key=<nop>
     endif
 
@@ -71,15 +71,12 @@ endif
 " Colors
 "
 
-" turn on syntax highlighting
-syntax on
-
 " set the default color scheme
 set background=dark
 colorscheme base16-twilight
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Tabs
+" Indentation
 "
 
 " copy indent from current line when starting a new line
@@ -128,9 +125,7 @@ set visualbell
 " don't redraw when running macros
 set lazyredraw
 
-" change the default status line
-" and always display it
-set statusline=%t\ [%Y%M%R]\ CWD=%{getcwd()}%=Line:\ %l/%L%9(Col:\ %02c%)
+" always display our statusline
 set laststatus=2
 
 " show matches for command completion
@@ -203,7 +198,11 @@ call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
 " ctrl+w should close the buffer
 call MultiMap("<Leader>w", ":bd<CR>")
 
-" when text is selected, tab and shift-tab should indent
+" switch buffers with ctrl-tab and ctrl-shift-tab
+noremap <C-TAB>   :bn<CR>
+noremap <C-S-TAB> :bp<CR>
+
+" when text is selected, < and > indent
 vnoremap > >gv
 vnoremap < <gv
 
@@ -212,25 +211,60 @@ vnoremap < <gv
 vnoremap p "_dp
 vnoremap P "_dP
 
-" ctrl+left and ctrl+right should do the right thing in normal mode
-noremap  <C-LEFT>  b
-noremap  <C-RIGHT> e
-
-" ctrl+shift+left and ctrl+shift+right should do the right thing
-noremap  <C-S-LEFT> vb<C-G>
-inoremap <C-S-LEFT> <C-\><C-O>vb<C-G>
-vnoremap <C-S-LEFT> b
-
-noremap  <C-S-RIGHT> ve<C-G>
-inoremap <C-S-RIGHT> <C-\><C-O>ve<C-G>
-vnoremap <C-S-RIGHT> e
-
 " shift+j and shift+k should move by pages
 nnoremap <S-J> <PageDown>
 nnoremap <S-K> <PageUp>
 
 xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Buffer Movement
+"
+" in any sort of ui with tabs, i always want to enter the tab to the right
+" when the current tab is closed.  i want the same thing with my buffers.  go
+" to the next *valid* buffer when the current buffer is deleted.
+"
+
+let s:nextBufnr = -1
+
+function! s:OnBufEnter(buffer)
+    " only do anything if we have a next buffer set
+    if (s:nextBufnr != -1)
+        exec "b " . s:nextBufnr
+    endif
+
+    let s:nextBufnr = -1
+endfunction
+
+function! s:OnBufDelete(buffer)
+    let s:nextBufnr = -1
+
+    " only set a next buffer if we don't have multiple windows.
+    " if we do, we'll just go to another window, which is fine.
+    if (winbufnr(2) == -1)
+        let l:bufnrs = range(1, bufnr('$'))
+        call filter(l:bufnrs, 'buflisted(v:val)')
+
+        let l:bufnr = str2nr(a:buffer)
+        let l:index = index(l:bufnrs, l:bufnr)
+
+        " we only care if we consider our current buffer 'valid'
+        if (l:index != -1)
+            let l:nextIndex = l:index + 1
+
+            " if we're closing the last buffer, go to the previous instead
+            if (len(l:bufnrs) <= l:nextIndex)
+                let l:nextIndex = l:nextIndex - 2
+            endif
+
+            let s:nextBufnr = l:bufnrs[l:nextIndex]
+        endif
+    endif
+endfunction
+
+autocmd BufEnter    * call s:OnBufEnter(expand("<abuf>"))
+autocmd BufDelete   * call s:OnBufDelete(expand("<abuf>"))
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax Highlighting
@@ -278,6 +312,36 @@ vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
 " Plugins
 "
 
+" lightline
+set showtabline=2
+let g:lightline =
+  \ {
+  \     'colorscheme': 'syntax',
+  \     'active': {
+  \         'left': [
+  \             ['mode'],
+  \             ['fugitive', 'filename', 'modified'],
+  \         ],
+  \     },
+  \     'tabline': {
+  \         'left':  [['buffers']],
+  \         'right': [[]],
+  \     },
+  \     'component_function': {
+  \         'fugitive': 'LightlineFugitive',
+  \     },
+  \     'separator':    { 'left': "\ue0b0", 'right': "\ue0b2" },
+  \     'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+  \ }
+
+function! LightlineFugitive()
+    if exists("*fugitive#head")
+        let _ = fugitive#head()
+        return strlen(_) ? ' '._ : ''
+    endif
+    return ''
+endfunction
+
 " ultisnips
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
@@ -289,9 +353,6 @@ call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
 " filelist
 call MultiMap("<Leader>f", ":FileList<CR>")
 
-" conque
-call MultiMap("<C-Space>", ":ConqueTerm cmd<CR>")
-
 " filetype switching
 augroup SourceHeaderPairs
     autocmd BufEnter *.cpp,*.cxx,*.cc,*.c let b:fswitchdst  = "h,hpp"
@@ -301,28 +362,12 @@ augroup end
 
 call MultiMap("<C-F10>", ":FSHere<CR>")
 
-" delimit helpers
-let g:delimitMate_expand_cr = 1
-let g:loaded_delimitMate = 1
-
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " tab alignment
-function! TabAlign(arg) range
-    let l:cursor = getpos('.')
-    exec a:firstline . "," . a:lastline . "Tabularize " . a:arg
-    call setpos('.', l:cursor)
-endfunction
-
-noremap  <silent> <Leader>a=            :call TabAlign('/=')<CR>
-inoremap <silent> <Leader>a=       <C-O>:call TabAlign('/=')<CR>
-noremap  <silent> <Leader>a:            :call TabAlign('/:\zs/l0l1')<CR>
-inoremap <silent> <Leader>a:       <C-O>:call TabAlign('/:\zs/l0l1')<CR>
-noremap  <silent> <Leader>a,            :call TabAlign('/,\zs/l0l1')<CR>
-inoremap <silent> <Leader>a,       <C-O>:call TabAlign('/,\zs/l0l1')<CR>
-noremap  <silent> <Leader>a<Space>      :call TabAlign('/\>/l0l1')<CR>
-inoremap <silent> <Leader>a<Space> <C-O>:call TabAlign('/\>/l0l1')<CR>
+nmap <Leader>a <Plug>(EasyAlign)ip
+vmap <Leader>a <Plug>(EasyAlign)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
@@ -332,9 +377,9 @@ inoremap <silent> <Leader>a<Space> <C-O>:call TabAlign('/\>/l0l1')<CR>
 autocmd BufReadPost * call RestorePosition()
 function! RestorePosition()
     if line("'\"") <= line("$")
-        execute "normal `\""
+        normal `"
     else
-        execute "normal $"
+        normal G
     endif
 endfunction
 
@@ -354,14 +399,6 @@ endif
 autocmd FileType * set formatoptions-=o
 autocmd FileType * set formatoptions-=r
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Other Environments
-"
-
-if filereadable($HOME . "/work.vim")
-    source $HOME/work.vim
-endif
-
 let g:loaded_vimrc = 1
-
 " vim:ft=vim:ff=unix
+
