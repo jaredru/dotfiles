@@ -23,7 +23,8 @@ Plug 'fouvrai/base16-vim'
 Plug 'fouvrai/lightline.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
-Plug 'junegunn/vim-easy-align'
+Plug 'fouvrai/vim-commenter',   { 'on': ['Comment', 'Uncomment'] }
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'Lokaltog/vim-easymotion'
 Plug 'derekwyatt/vim-fswitch',  { 'on': 'FSHere' }
 Plug 'tpope/vim-fugitive'
@@ -33,7 +34,6 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
 
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
-Plug 'https://bitbucket.org/fouvrai/vim-commenter.git'
 Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
 
 " interesting things that i'm not actively using
@@ -103,14 +103,17 @@ set expandtab
 " User Interface
 "
 
-" don't wrap lines
-set nowrap
-
 " show line numbers
 set number
 
+" don't wrap lines
+set nowrap
+
 " folding is awful
 set nofoldenable
+
+" selection (visual mode, for instance) is *exclusive*
+set selection=exclusive
 
 " show tabs and trailing spaces
 set listchars=tab:»·,trail:•
@@ -128,6 +131,10 @@ set lazyredraw
 " always display our statusline
 set laststatus=2
 
+" show info about the command we're currently running
+" also shows the size of our current selection in visual mode
+set showcmd
+
 " show matches for command completion
 set wildmenu
 
@@ -143,6 +150,9 @@ set scrolloff=3
 
 " move freely between lines
 set whichwrap+=<,>,[,],h,l
+
+" allow selecting one char after the end of the line
+set virtualedit=block,onemore
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -205,6 +215,9 @@ noremap <C-S-TAB> :bp<CR>
 " when text is selected, < and > indent
 vnoremap > >gv
 vnoremap < <gv
+
+" $ doesn't go past the last char with virtualedit=onemore
+nnoremap <silent> $ :call cursor(line('.'), col('$'))<CR>
 
 " visual paste should delete to the black hole register first so we don't
 " overwrite the unnamed register
@@ -298,21 +311,22 @@ function! FindAndReplace()
     normal gv"hy
 
     if @h =~ "\n"
-        return "'<,'>s//"
+        return "'<,'>s/"
     else
-        return "%s/" . escape(@h, '"\/') . "//"
+        return "%s/" . escape(@h, '"\/') . "/"
     endif
 endfunction
 
-noremap  <C-H>      :%s/<C-R><C-W>//<Left>
-inoremap <C-H> <C-O>:%s/<C-R><C-W>//<Left>
-vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR><Left>
+noremap  <C-H>      :%s/<C-R><C-W>/
+inoremap <C-H> <C-O>:%s/<C-R><C-W>/
+vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 "
 
 " lightline
+set noshowmode
 set showtabline=2
 let g:lightline =
   \ {
@@ -364,6 +378,15 @@ call MultiMap("<C-F10>", ":FSHere<CR>")
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" commenter
+nnoremap <silent> <C-K>      :Comment<CR>
+inoremap <silent> <C-K> <C-O>:Comment<CR>
+vnoremap <silent> <C-K>      :Comment<CR>gv
+
+nnoremap <silent> <C-J>      :Uncomment<CR>
+inoremap <silent> <C-J> <C-O>:Uncomment<CR>
+vnoremap <silent> <C-J>      :Uncomment<CR>gv
 
 " tab alignment
 nmap <Leader>a <Plug>(EasyAlign)ip
