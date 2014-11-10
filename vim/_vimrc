@@ -1,0 +1,5 @@
+
+" load my real vimrc
+set runtimepath=$TOOLSDRIVE//Vim/vimfiles,$VIMRUNTIME,$TOOLSDRIVE//Vim/vimfiles/after
+runtime vimrc
+

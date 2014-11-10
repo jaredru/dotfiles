@@ -1,0 +1,437 @@
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+"
+
+" behave less like vi (i.e. more vim features)
+set nocompatible
+
+" use a better default encoding
+set encoding=utf-8
+
+" don't dump swap files in cwd
+set directory-=.
+set directory+=$TEMP
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plug
+"
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'fouvrai/base16-vim'
+Plug 'fouvrai/lightline.vim'
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'fouvrai/vim-commenter',   { 'on': ['Comment', 'Uncomment'] }
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
+Plug 'Lokaltog/vim-easymotion'
+Plug 'derekwyatt/vim-fswitch',  { 'on': 'FSHere' }
+Plug 'tpope/vim-fugitive'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'PProvost/vim-ps1',        { 'for': 'ps1' }
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-surround'
+
+Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
+Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
+
+" interesting things that i'm not actively using
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'chrisbra/NrrwRgn'
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'justinmk/vim-sneak'
+
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" GUI
+"
+
+if has("gui")
+    " use my screen real estate
+    if !exists("loaded_vimrc")
+        set lines=60
+        set columns=120
+    endif
+
+    " use a better font
+    if has("win32")
+        set guifont=Consolas:h9
+    elseif has("mac")
+        set guifont=Meslo\ LG\ S\ for\ Powerline:h11
+        macmenu File.Close key=<nop>
+    endif
+
+    " minimize the gui
+    set guioptions=r
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colors
+"
+
+" set the default color scheme
+set background=dark
+colorscheme base16-twilight
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Indentation
+"
+
+" copy indent from current line when starting a new line
+" and use per-filetype indentation rules
+set autoindent
+filetype indent on
+
+" filetype indent does weird things with #
+inoremap # X#
+
+" tabs are 4 spaces
+set tabstop=4
+
+" tabs feel like 4 spaces
+set softtabstop=4
+
+" autoindents are 4 spaces
+set shiftwidth=4
+
+" use spaces instead of tabs
+set expandtab
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" User Interface
+"
+
+" show line numbers
+set number
+
+" don't wrap lines
+set nowrap
+
+" folding is awful
+set nofoldenable
+
+" selection (visual mode, for instance) is *exclusive*
+set selection=exclusive
+
+" show tabs and trailing spaces
+set listchars=tab:»·,trail:•
+set list
+
+" flash matched parentheses, brackets, and braces
+set showmatch
+
+" flash instead of beep for errors
+set visualbell
+
+" don't redraw when running macros
+set lazyredraw
+
+" always display our statusline
+set laststatus=2
+
+" show info about the command we're currently running
+" also shows the size of our current selection in visual mode
+set showcmd
+
+" show matches for command completion
+set wildmenu
+
+" show the popup even for just one match
+set completeopt=menu,menuone,preview
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Movement
+"
+
+" keep four lines when scrolling
+set scrolloff=3
+
+" move freely between lines
+set whichwrap+=<,>,[,],h,l
+
+" allow selecting one char after the end of the line
+set virtualedit=block,onemore
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Searching
+"
+
+" make searches case insensitive
+" unless they're mixed case
+set ignorecase
+set smartcase
+
+" search while typing
+set incsearch
+
+" do not highlight the last used search term
+set nohlsearch
+
+" by default we want substitutions to occur in the entire line
+set gdefault
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Files
+"
+
+" allow switching buffers without saving
+set hidden
+
+" automatically set our working dir to the current file
+set autochdir
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings
+"
+
+" comma leader is much more handy
+let mapleader=','
+
+" automatically map various states properly
+function! MultiMap(lhs, rhs)
+    exec "noremap  <silent>" . a:lhs . "      " . a:rhs
+    exec "inoremap <silent>" . a:lhs . " <C-O>" . a:rhs
+    exec "vnoremap <silent>" . a:lhs . " <C-C>" . a:rhs . "gv"
+endfunction
+
+" edit this file
+call MultiMap("<C-F1>", ":e " . expand("<sfile>:p") . "<CR>")
+
+" enable/disable hlsearch
+call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
+
+" ctrl+w should close the buffer
+call MultiMap("<Leader>w", ":bd<CR>")
+
+" switch buffers with ctrl-tab and ctrl-shift-tab
+noremap <C-TAB>   :bn<CR>
+noremap <C-S-TAB> :bp<CR>
+
+" when text is selected, < and > indent
+vnoremap > >gv
+vnoremap < <gv
+
+" $ doesn't go past the last char with virtualedit=onemore
+nnoremap <silent> $ :call cursor(line('.'), col('$'))<CR>
+
+" visual paste should delete to the black hole register first so we don't
+" overwrite the unnamed register
+vnoremap p "_dp
+vnoremap P "_dP
+
+" shift+j and shift+k should move by pages
+nnoremap <S-J> <PageDown>
+nnoremap <S-K> <PageUp>
+
+xnoremap <S-J> <S-PageDown>
+xnoremap <S-K> <S-PageUp>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Buffer Movement
+"
+" in any sort of ui with tabs, i always want to enter the tab to the right
+" when the current tab is closed.  i want the same thing with my buffers.  go
+" to the next *valid* buffer when the current buffer is deleted.
+"
+
+let s:nextBufnr = -1
+
+function! s:OnBufEnter(buffer)
+    " only do anything if we have a next buffer set
+    if (s:nextBufnr != -1)
+        exec "b " . s:nextBufnr
+    endif
+
+    let s:nextBufnr = -1
+endfunction
+
+function! s:OnBufDelete(buffer)
+    let s:nextBufnr = -1
+
+    " only set a next buffer if we don't have multiple windows.
+    " if we do, we'll just go to another window, which is fine.
+    if (winbufnr(2) == -1)
+        let l:bufnrs = range(1, bufnr('$'))
+        call filter(l:bufnrs, 'buflisted(v:val)')
+
+        let l:bufnr = str2nr(a:buffer)
+        let l:index = index(l:bufnrs, l:bufnr)
+
+        " we only care if we consider our current buffer 'valid'
+        if (l:index != -1)
+            let l:nextIndex = l:index + 1
+
+            " if we're closing the last buffer, go to the previous instead
+            if (len(l:bufnrs) <= l:nextIndex)
+                let l:nextIndex = l:nextIndex - 2
+            endif
+
+            let s:nextBufnr = l:bufnrs[l:nextIndex]
+        endif
+    endif
+endfunction
+
+autocmd BufEnter    * call s:OnBufEnter(expand("<abuf>"))
+autocmd BufDelete   * call s:OnBufDelete(expand("<abuf>"))
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntax Highlighting
+"
+
+function! s:ShowSyntaxGroups()
+    let l:id    = synID(line('.'), col('.'), 0)
+    let l:names = []
+
+    while 1
+        call add(l:names, synIDattr(l:id, 'name'))
+        let l:next = synIDtrans(l:id)
+
+        if l:next != l:id
+            let l:id = l:next
+        else
+            break
+        endif
+    endwhile
+
+    echo join(l:names, ' -> ')
+endfunction
+
+noremap <Leader>sg :call <SID>ShowSyntaxGroups()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Find & Replace
+"
+
+function! FindAndReplace()
+    normal gv"hy
+
+    if @h =~ "\n"
+        return "'<,'>s/"
+    else
+        return "%s/" . escape(@h, '"\/') . "/"
+    endif
+endfunction
+
+noremap  <C-H>      :%s/<C-R><C-W>/
+inoremap <C-H> <C-O>:%s/<C-R><C-W>/
+vnoremap <C-H> <C-C>:<C-R>=FindAndReplace()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"
+
+" lightline
+set noshowmode
+set showtabline=2
+let g:lightline =
+  \ {
+  \     'colorscheme': 'syntax',
+  \     'active': {
+  \         'left': [
+  \             ['mode'],
+  \             ['fugitive', 'filename', 'modified'],
+  \         ],
+  \     },
+  \     'tabline': {
+  \         'left':  [['buffers']],
+  \         'right': [[]],
+  \     },
+  \     'component_function': {
+  \         'fugitive': 'LightlineFugitive',
+  \     },
+  \     'separator':    { 'left': "\ue0b0", 'right': "\ue0b2" },
+  \     'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+  \ }
+
+function! LightlineFugitive()
+    if exists("*fugitive#head")
+        let _ = fugitive#head()
+        return strlen(_) ? ' '._ : ''
+    endif
+    return ''
+endfunction
+
+" ultisnips
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+let g:UltiSnipsSnippetsDir = expand("<sfile>:p:h") . "/bundle/snippets/UltiSnips"
+call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
+
+" filelist
+call MultiMap("<Leader>f", ":FileList<CR>")
+
+" filetype switching
+augroup SourceHeaderPairs
+    autocmd BufEnter *.cpp,*.cxx,*.cc,*.c let b:fswitchdst  = "h,hpp"
+    autocmd BufEnter *.hpp,*.hxx,*.h      let b:fswitchdst  = "cpp,cxx,cc,c"
+    autocmd BufEnter *                    let b:fswitchlocs = "./"
+augroup end
+
+call MultiMap("<C-F10>", ":FSHere<CR>")
+
+" supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" commenter
+nnoremap <silent> <C-K>      :Comment<CR>
+inoremap <silent> <C-K> <C-O>:Comment<CR>
+vnoremap <silent> <C-K>      :Comment<CR>gv
+
+nnoremap <silent> <C-J>      :Uncomment<CR>
+inoremap <silent> <C-J> <C-O>:Uncomment<CR>
+vnoremap <silent> <C-J>      :Uncomment<CR>gv
+
+" easymotion
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_smartcase        = 1
+let g:EasyMotion_use_upper        = 1
+let g:EasyMotion_keys             = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+
+map  f <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+map  / <Plug>(easymotion-sn)
+
+" tab alignment
+nmap <Leader>a <Plug>(EasyAlign)ip
+vmap <Leader>a <Plug>(EasyAlign)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocommands
+"
+
+" when editing a file, jump to the last cursor position
+autocmd BufReadPost * call RestorePosition()
+function! RestorePosition()
+    if line("'\"") <= line("$")
+        normal `"
+    else
+        normal G
+    endif
+endfunction
+
+" for windows, if the file is a symbolic link, set backupcopy to yes
+if has("win32")
+    autocmd BufReadPost * call HandleSymLinksOnWindows()
+    function! HandleSymLinksOnWindows()
+        let l:dir = system("dir " . expand("<afile>"))
+
+        if (match(l:dir, "SYMLINK") != -1)
+            set backupcopy=yes
+        endif
+    endfunction
+endif
+
+" override vim's default ftplugins for indenting our text
+autocmd FileType * set formatoptions-=o
+autocmd FileType * set formatoptions-=r
+
+let g:loaded_vimrc = 1
+" vim:ft=vim:ff=unix
+
