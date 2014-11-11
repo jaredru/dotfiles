@@ -6,9 +6,6 @@
 # get all .zsh files in our config path
 config_files=($XDG_CONFIG_HOME/**/*.zsh)
 
-# but filter out antigen files, as they'll be handled by antigen itself
-config_files=(${config_files:#$XDG_CONFIG_HOME/antigen/*})
-
 # source them all
 for file in $config_files; do
     source $file
@@ -30,7 +27,7 @@ unset local_zshrc
 # Plugins
 #
 
-export ADOTDIR=$XDG_CONFIG_HOME/antigen
+export ADOTDIR=$XDG_CACHE_HOME/zsh/antigen
 
 antigen bundle fouvrai/zsh-polka
 antigen bundle fouvrai/zsh-pure
