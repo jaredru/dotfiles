@@ -43,7 +43,7 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'fouvrai/vim-commenter',   { 'on': ['Comment', 'Uncomment'] }
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
-Plug 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion', { 'on': ['<Plug>(easymotion-prefix)', '<Plug>(easymotion-f)', '<Plug>(easymotion-s2)', '<Plug>(easymotion-sn)'] }
 Plug 'derekwyatt/vim-fswitch',  { 'on': 'FSHere' }
 Plug 'tpope/vim-fugitive'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -412,9 +412,10 @@ let g:EasyMotion_smartcase        = 1
 let g:EasyMotion_use_upper        = 1
 let g:EasyMotion_keys             = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
-map  f <Plug>(easymotion-s)
-nmap s <Plug>(easymotion-s2)
-map  / <Plug>(easymotion-sn)
+map  <Leader><Leader> <Plug>(easymotion-prefix)
+map  f                <Plug>(easymotion-f)
+nmap s                <Plug>(easymotion-s2)
+map  /                <Plug>(easymotion-sn)
 
 " tab alignment
 nmap <Leader>a <Plug>(EasyAlign)ip
