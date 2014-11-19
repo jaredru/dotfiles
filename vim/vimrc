@@ -249,6 +249,10 @@ nnoremap <S-K> <PageUp>
 xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
 
+" json formatting
+nnoremap <Leader>json :.!python -m json.tool<CR>
+vnoremap <Leader>json :!python -m json.tool<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Buffer Movement
 "
