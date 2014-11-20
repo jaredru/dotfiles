@@ -1,7 +1,4 @@
 
-# antigen will download everything as required
-/antigen/
-
 # generated
 .zcompdump
 
