@@ -42,17 +42,19 @@ Plug 'fouvrai/lightline.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'fouvrai/vim-commenter',   { 'on': ['Comment', 'Uncomment'] }
-Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)'] }
 Plug 'Lokaltog/vim-easymotion', { 'on': ['<Plug>(easymotion-prefix)', '<Plug>(easymotion-f)', '<Plug>(easymotion-s2)', '<Plug>(easymotion-sn)'] }
-Plug 'derekwyatt/vim-fswitch',  { 'on': 'FSHere' }
+Plug 'derekwyatt/vim-fswitch',  { 'on': ['FSHere'] }
 Plug 'tpope/vim-fugitive'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'PProvost/vim-ps1',        { 'for': 'ps1' }
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
 
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
 Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
+
+" file type
+Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
+Plug 'PProvost/vim-ps1',        { 'for': ['ps1'] }
 
 " interesting things that i'm not actively using
 " Plug 'jiangmiao/auto-pairs'
@@ -389,6 +391,10 @@ call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
 " filelist
 call MultiMap("<Leader>f", ":FileList<CR>")
 
+if has("mac")
+    let g:FileList_CacheGenerationCommand = 'ag -l "." {dir} | sed -E "s#(.*)/([^/]+$)#\2 (\1)#" | sort -f > {out}'
+endif
+
 " filetype switching
 augroup SourceHeaderPairs
     autocmd BufEnter *.cpp,*.cxx,*.cc,*.c let b:fswitchdst  = "h,hpp"
@@ -420,6 +426,8 @@ map  <Leader><Leader> <Plug>(easymotion-prefix)
 map  f                <Plug>(easymotion-f)
 nmap s                <Plug>(easymotion-s2)
 map  /                <Plug>(easymotion-sn)
+
+noremap <Leader>/ /
 
 " tab alignment
 nmap <Leader>a <Plug>(EasyAlign)ip
