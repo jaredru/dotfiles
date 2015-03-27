@@ -6,6 +6,8 @@
 alias ls="ls -lG"
 alias v="mvim"
 
+alias cart="carthage"
+
 recursive-find() {
     setopt local_options
     setopt extended_glob
