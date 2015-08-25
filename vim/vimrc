@@ -53,8 +53,9 @@ Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
 Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
 
 " file type
-Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-Plug 'PProvost/vim-ps1',        { 'for': ['ps1'] }
+Plug 'kchmck/vim-coffee-script', { 'for': ['coffee'] }
+Plug 'pangloss/vim-javascript',  { 'for': ['javascript'] }
+Plug 'PProvost/vim-ps1',         { 'for': ['ps1'] }
 
 " interesting things that i'm not actively using
 " Plug 'jiangmiao/auto-pairs'
@@ -250,6 +251,9 @@ nnoremap <S-K> <PageUp>
 
 xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
+
+" but keep line joining enabled via leader
+noremap <Leader><S-J> <S-J>
 
 " json formatting
 nnoremap <Leader>json :.!python -m json.tool<CR>
