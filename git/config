@@ -14,8 +14,8 @@
 
 
 [alias]
-    lg  = log --graph --format=format:'%C(blue)%h %Creset%an %C(green)(%ar) %C(yellow)%d%n        %Creset%s%n' --abbrev-commit
-    lga = log --graph --format=format:'%C(blue)%h %Creset%an %C(green)(%ar) %C(yellow)%d%n        %Creset%s%n' --abbrev-commit --all
+    lg  = log --graph --format=format:'%C(blue)%h %Creset%an %C(green)(%ar) %C(yellow)%d%n        %Creset%s%n' --abbrev-commit --date-order
+    lga = log --graph --format=format:'%C(blue)%h %Creset%an %C(green)(%ar) %C(yellow)%d%n        %Creset%s%n' --abbrev-commit --date-order --all
 
     stat = status --short --branch
     out  = checkout
