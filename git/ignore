@@ -2,3 +2,6 @@
 # fk you osx
 .DS_Store
 
+# Carthage
+Carthage/Build
+
