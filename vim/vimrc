@@ -393,7 +393,9 @@ let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-let g:UltiSnipsSnippetsDir = expand("<sfile>:p:h") . "/bundle/snippets/UltiSnips"
+" not sure if this is needed any longer. haven't used ultisnips in a while,
+" and my entire vim config has changed a lot since then.
+" let g:UltiSnipsSnippetsDir = s:cache_path('plugged') . "/ultisnips-snippets/UltiSnips"
 call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
 
 " filelist
