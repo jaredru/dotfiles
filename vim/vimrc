@@ -38,14 +38,14 @@ set runtimepath^=$XDG_CONFIG_HOME/vim
 call plug#begin(s:cache_path('plugged'))
 
 Plug 'fouvrai/base16-vim'
-Plug 'gregsexton/gitv',         { 'on': ['Gitv'] }
+Plug 'gregsexton/gitv',           { 'on': ['Gitv'] }
 Plug 'fouvrai/lightline.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
-Plug 'fouvrai/vim-commenter',   { 'on': ['Comment', 'Uncomment'] }
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)'] }
-Plug 'Lokaltog/vim-easymotion', { 'on': ['<Plug>(easymotion-prefix)', '<Plug>(easymotion-f)', '<Plug>(easymotion-s2)', '<Plug>(easymotion-sn)'] }
-Plug 'derekwyatt/vim-fswitch',  { 'on': ['FSHere'] }
+Plug 'fouvrai/vim-commenter',     { 'on': ['Comment', 'Uncomment'] }
+Plug 'junegunn/vim-easy-align',   { 'on': ['<Plug>(EasyAlign)'] }
+Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-prefix)', '<Plug>(easymotion-f)', '<Plug>(easymotion-s2)', '<Plug>(easymotion-sn)'] }
+Plug 'derekwyatt/vim-fswitch',    { 'on': ['FSHere'] }
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
