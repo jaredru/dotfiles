@@ -27,7 +27,7 @@ unset local_zshrc
 # Plugins
 #
 
-export ADOTDIR=$XDG_CACHE_HOME/zsh/antigen
+export ADOTDIR=$ZCACHEDIR/antigen
 
 antigen bundle fouvrai/zsh-polka
 antigen bundle fouvrai/zsh-pure
@@ -57,6 +57,13 @@ alias reload="profile-reload"
 #
 # Options
 #
+
+# save command history
+# save 10k commands total
+# save 10k commands per session
+HISTFILE=$ZCACHEDIR/history
+SAVEHIST=10000
+HISTSIZE=10000
 
 # better color switching
 # https://wiki.archlinux.org/index.php/zsh#Colors
