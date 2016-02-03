@@ -57,6 +57,7 @@ Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee'] }
 Plug 'pangloss/vim-javascript',  { 'for': ['javascript'] }
 Plug 'PProvost/vim-ps1',         { 'for': ['ps1'] }
+Plug 'rodjek/vim-puppet',        { 'for': ['puppet'] }
 
 " interesting things that i'm not actively using
 " Plug 'jiangmiao/auto-pairs'
