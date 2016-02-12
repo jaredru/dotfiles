@@ -28,6 +28,8 @@
 
     mt = mergetool
 
+    trim = !"git remote | xargs git remote prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d"
+
 
 
 [credential]
