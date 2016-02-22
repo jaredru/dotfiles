@@ -3,10 +3,11 @@
 # Aliases
 #
 
-alias ls="ls -lG"
-alias v="mvim"
+alias ls='ls -lG'
 
-alias cart="carthage"
+alias cart='carthage'
+
+alias fnr='sed -i "" -E'
 
 recursive-find() {
     setopt local_options
@@ -20,5 +21,5 @@ recursive-find() {
     \ls -1dG **/(#l)${~*}
 }
 
-alias lsf="noglob recursive-find"
+alias lsf='noglob recursive-find'
 
