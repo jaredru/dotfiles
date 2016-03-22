@@ -38,7 +38,6 @@ set runtimepath^=$XDG_CONFIG_HOME/vim
 call plug#begin(s:cache_path('plugged'))
 
 Plug 'fouvrai/base16-vim'
-Plug 'gregsexton/gitv',           { 'on': ['Gitv'] }
 Plug 'fouvrai/lightline.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
@@ -63,7 +62,6 @@ Plug 'rodjek/vim-puppet',        { 'for': ['puppet'] }
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'chrisbra/NrrwRgn'
 " Plug 'nathanaelkane/vim-indent-guides'
-" Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
