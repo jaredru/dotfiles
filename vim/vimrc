@@ -59,6 +59,15 @@ Plug 'PProvost/vim-ps1',         { 'for': ['ps1'] }
 Plug 'rodjek/vim-puppet',        { 'for': ['puppet'] }
 
 " interesting things that i'm not actively using
+" Plug 'airblade/vim-gitgutter'
+" Plug 'junegunn/gv.vim'
+" Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-jdaddy'
+" Plug 'tpope/vim-capslock'
+" Plug 'mbbill/undotree'
+" Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'junegunn/vim-after-object'
+" Plug 'justinmk/vim-gtfo'
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'chrisbra/NrrwRgn'
 " Plug 'nathanaelkane/vim-indent-guides'
