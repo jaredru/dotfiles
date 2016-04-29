@@ -1,4 +1,4 @@
-version='1'; created_on='Mon Mar 21 18:46:30 PDT 2016'; checksum='c4d654256017885a2b43a5336913d865';
+version='1'; created_on='Fri Apr 29 13:17:26 PDT 2016'; checksum='358abff490d9e741692c428de2198cdc';
 240cbd5aaf99f918973aacf38c418e00f893b57d https://github.com/fouvrai/zsh-polka.git
 b5c24e10dc1c6c1c43e91b438c8de905cb2a3cb8 https://github.com/fouvrai/zsh-pure.git
-cb02451a4e08d7c0157595db52769ed994aea3b5 https://github.com/zsh-users/zsh-syntax-highlighting.git
+341a3ae1f015fc366edfa7d31d0f96c693c9343c https://github.com/zsh-users/zsh-syntax-highlighting.git
