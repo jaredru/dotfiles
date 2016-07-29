@@ -57,6 +57,7 @@ Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
 " file type
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee'] }
 Plug 'pangloss/vim-javascript',  { 'for': ['javascript'] }
+Plug 'mxw/vim-jsx',              { 'for': ['javascript'] }
 Plug 'PProvost/vim-ps1',         { 'for': ['ps1'] }
 Plug 'rodjek/vim-puppet',        { 'for': ['puppet'] }
 
@@ -455,6 +456,9 @@ noremap <Leader>/ /
 " tab alignment
 nmap <Leader>a <Plug>(EasyAlign)ip
 vmap <Leader>a <Plug>(EasyAlign)
+
+" jsx
+let g:jsx_ext_required = 0
 
 " golang
 let g:go_doc_keywordprg_enabled = 0
