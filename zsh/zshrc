@@ -29,8 +29,8 @@ unset local_zshrc
 
 export ADOTDIR=$ZCACHEDIR/antigen
 
-antigen bundle fouvrai/zsh-polka
-antigen bundle fouvrai/zsh-pure
+antigen bundle jaredru/zsh-polka
+antigen bundle jaredru/zsh-pure
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen apply
