@@ -5,9 +5,11 @@
 
 alias ls='ls -lG'
 
-alias cart='carthage'
-
 alias fnr='sed -i "" -E'
+
+alias rmt='trash'
+
+alias cart='carthage'
 
 recursive-find() {
     setopt local_options
