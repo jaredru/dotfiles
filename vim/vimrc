@@ -412,7 +412,7 @@ call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
 call MultiMap("<Leader>f", ":FileList<CR>")
 
 if has("mac")
-    let g:FileList_CacheGenerationCommand = 'ag -l "." {dir} | sed -E "s#(.*)/([^/]+$)#\2 (\1)#" | sort -f > {out}'
+    let g:FileList_CacheGenerationCommand = 'rg -l "." {dir} | sed -E "s#(.*)/([^/]+$)#\2 (\1)#" | sort -f > {out}'
 endif
 
 " filetypes

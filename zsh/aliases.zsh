@@ -3,13 +3,17 @@
 # Aliases
 #
 
-alias ls='ls -lG'
+alias cart='carthage'
 
 alias fnr='sed -i "" -E'
 
-alias rmt='trash'
+alias ls='ls -lG'
 
-alias cart='carthage'
+alias lsf='noglob recursive-find'
+
+alias rg='rg -S'
+
+alias rmt='trash'
 
 recursive-find() {
     setopt local_options
@@ -22,6 +26,4 @@ recursive-find() {
     # ${~var} - allows globbing and file expansion on the variable
     \ls -1dG **/(#l)${~*}
 }
-
-alias lsf='noglob recursive-find'
 

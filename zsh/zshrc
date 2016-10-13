@@ -3,8 +3,11 @@
 # Config
 #
 
-# get all .zsh files in our config path
-config_files=($XDG_CONFIG_HOME/**/*.zsh)
+# enable advanced glob features
+setopt extended_glob
+
+# get all .zsh files in our config path except antigen
+config_files=($XDG_CONFIG_HOME/**/*.zsh~*/antigen/*)
 
 # source them all
 for file in $config_files; do
@@ -28,6 +31,9 @@ unset local_zshrc
 #
 
 export ADOTDIR=$ZCACHEDIR/antigen
+source $ZDOTDIR/antigen/antigen.zsh
+
+antigen init
 
 antigen bundle jaredru/zsh-polka
 antigen bundle jaredru/zsh-pure
