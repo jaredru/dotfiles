@@ -33,12 +33,10 @@ unset local_zshrc
 export ADOTDIR=$ZCACHEDIR/antigen
 source $ZDOTDIR/antigen/antigen.zsh
 
-antigen init
-
+antigen bundle mafredri/zsh-async
 antigen bundle jaredru/zsh-polka
 antigen bundle jaredru/zsh-pure
 antigen bundle zsh-users/zsh-syntax-highlighting
-
 antigen apply
 
 #
