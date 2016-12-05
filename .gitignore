@@ -3,3 +3,7 @@
 .netrwhist
 .zcompdump
 
+# things i don't care to track
+composer/
+configstore/
+
