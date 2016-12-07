@@ -21,7 +21,7 @@ endfunction
 let &directory  = s:cache_path('swap')
 let &backupdir  = s:cache_path('backup')
 let &undodir    = s:cache_path('undo')
-let &viminfo   .= ',n' . s:cache_path('viminfo')
+let &viminfo   .= ',n' . s:cache_path(has('nvim') ? 'nviminfo' : 'viminfo')
 
 call s:ensure_dir(&directory)
 call s:ensure_dir(&backupdir)
