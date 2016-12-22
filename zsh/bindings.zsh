@@ -13,8 +13,9 @@ bindkey "^E" end-of-line
 bindkey "\eb" backward-word
 bindkey "\ef" forward-word
 
-# F8 to history completion
+# F8 and ctrl+space to history completion
 bindkey "\e[19~" history-beginning-search-backward
+bindkey "^@"     history-beginning-search-backward
 
 # delete should not insert a tilde
 bindkey "\e[3~" delete-char
