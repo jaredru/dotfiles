@@ -1,3 +1,3 @@
 
-source "$(npm bin --global)/chnode"
+source $(whence chnode)
 
