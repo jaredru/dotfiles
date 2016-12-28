@@ -72,13 +72,8 @@ HISTSIZE=10000
 # https://wiki.archlinux.org/index.php/zsh#Colors
 autoload -Uz colors && colors
 
-#  # load better tab completion support
-#  autoload -Uz compinit
-#  compinit
-
-# i used to have this set.  i'm honestly not sure what it does, and
-# i don't feel like looking it up right now.
-#  setopt no_case_glob
+# better tab completion support
+autoload -Uz compinit && compinit
 
 # be case insensitive
 # i need to read into this more, but the second bit (r:...) matches within filenames as well
