@@ -1,5 +1,0 @@
-version='1'; created_on='Wed Nov 30 15:38:23 PST 2016'; checksum='d6746b91f756e5ac5a972288f38a0001';
-240cbd5aaf99f918973aacf38c418e00f893b57d https://github.com/jaredru/zsh-polka.git
-5f3d9cb6662d699df10fbc785e627a44b65f861e https://github.com/jaredru/zsh-pure.git
-a4b2f81c966a00eeb38876d505d97423cc8addfd https://github.com/mafredri/zsh-async.git
-76ea9e1df3166209d5f937f57a0833f26b1a01bd https://github.com/zsh-users/zsh-syntax-highlighting.git

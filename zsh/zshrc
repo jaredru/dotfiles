@@ -30,14 +30,13 @@ unset local_zshrc
 # Plugins
 #
 
-export ADOTDIR=$ZCACHEDIR/antigen
-source $ZDOTDIR/antigen/antigen.zsh
+export ANTIBODY_HOME=$ZCACHEDIR/antibody
+source <(antibody init)
 
-antigen bundle mafredri/zsh-async
-antigen bundle jaredru/zsh-polka
-antigen bundle jaredru/zsh-pure
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen apply
+antibody bundle mafredri/zsh-async
+antibody bundle jaredru/zsh-polka
+antibody bundle jaredru/zsh-pure
+antibody bundle zsh-users/zsh-syntax-highlighting
 
 #
 # Profile
