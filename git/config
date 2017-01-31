@@ -21,9 +21,11 @@
     out  = checkout
 
     d  = diff
+    dp = !"f() { git diff $1~ $1; }; f"
     dc = diff --cached
 
     dt  = difftool
+    dtp = !"f() { git difftool $1~ $1; }; f"
     dtc = difftool --cached
 
     mt = mergetool
