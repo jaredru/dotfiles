@@ -20,6 +20,8 @@
     stat = status --short --branch
     out  = checkout
 
+    sup = submodule update --recursive --init
+
     d  = diff
     dp = !"f() { git diff $1~ $1; }; f"
     dc = diff --cached
