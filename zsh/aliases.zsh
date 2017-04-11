@@ -15,6 +15,8 @@ alias rg='rg -S'
 
 alias rmt='trash'
 
+psgrep() { ps up $(pgrep -f $@) 2>&-; }
+
 recursive-find() {
     setopt local_options
     setopt extended_glob
