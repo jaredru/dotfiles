@@ -37,7 +37,52 @@ for file in $XDG_CONFIG_HOME/**/*.symlink; do
     fi
 done
 
-# we're done with our indent function now
+# ensure homebrew is installed
+if ! command -v brew > /dev/null; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# install brew packages
+install() {
+    if [ ! -f "/usr/local/bin/${2:-$1}" ]; then
+        brew install "$1"
+    fi
+}
+
+install "getantibody/antibody/antibody" antibody
+install awscli aws
+install chruby chruby-exec
+install fzf
+install git
+install go
+install jq
+install maven mvn
+install "neovim/neovim/neovim" nvim
+install node
+install "node@6" node6
+install pstree
+install redis redis-cli
+install ripgrep rg
+install ruby
+install "ruby@2.2" ruby22
+install sqlite sqlite3
+install trash
+install tree
+install watchman
+install yarn
+install zsh
+
+# install our fonts
+cp -r fonts/* ~/Library/Fonts
+
+# bootstrap dependencies
+for file in $XDG_CONFIG_HOME/**/bootstrap.sh~$XDG_CONFIG_HOME/bootstrap.sh; do
+    $file
+done
+
+# we're done with our functions now
+unfunction install
 unfunction indent
 
 echo
