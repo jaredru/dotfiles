@@ -15,6 +15,8 @@ alias rg='rg -S'
 
 alias rmt='trash'
 
+alias vim='nvim'
+
 psgrep() { ps up $(pgrep -f $@) 2>&-; }
 
 recursive-find() {
