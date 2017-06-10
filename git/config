@@ -1,7 +1,7 @@
 
 [user]
     name  = Jared Russell
-    email = me@jaredrussell.com
+    email = jared@jaredru.com
 [help]
     format = html
 [core]
@@ -32,6 +32,7 @@
 
     mt = mergetool
 
+    save = !"git stash save --include-untracked && git stash apply"
     trim = !"git remote | xargs git remote prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
 
 
