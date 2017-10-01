@@ -4,6 +4,33 @@
 #
 
 export EDITOR=mvim
+export REACT_EDITOR=code
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+#
+# Node
+#
+
+chnode 8 > /dev/null
+
+#
+# Ruby
+#
+
+chruby 2 > /dev/null
+
+#
+# Go
+#
+
+export GOPATH=~/code/go
+#  export PATH=$PATH:$GOPATH/bin
+
+#
+# Java
+#
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export ANDROID_HOME=~/code/android/sdk
 

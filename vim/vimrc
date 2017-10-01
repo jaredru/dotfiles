@@ -76,6 +76,11 @@ Plug 'rodjek/vim-puppet',        { 'for': ['puppet'] }
 
 call plug#end()
 
+if exists('bootstrap')
+    source $XDG_CONFIG_HOME/vim/pluglock.vim
+    qa!
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
 "
