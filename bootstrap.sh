@@ -2,8 +2,8 @@
 set -efu -o pipefail
 
 # set our default xdg config path, but only if it's not already set
-[[ -z $XDG_CONFIG_HOME ]] && export XDG_CONFIG_HOME="$HOME/.config"
-[[ -z $XDG_CACHE_HOME ]]  && export XDG_CACHE_HOME="$HOME/.cache"
+[[ -z "${XDG_CONFIG_HOME-}" ]] && export XDG_CONFIG_HOME="$HOME/.config"
+[[ -z "${XDG_CACHE_HOME-}" ]]  && export XDG_CACHE_HOME="$HOME/.cache"
 
 # a simple function to indent a command's output
 indent() {
