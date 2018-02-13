@@ -32,5 +32,11 @@ export GOPATH=~/code/go
 #
 
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+#
+# Android
+#
+
 export ANDROID_HOME=~/code/android/sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
