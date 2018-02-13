@@ -5,7 +5,7 @@
 
 alias cart='carthage'
 
-alias fnr='sed -i "" -E'
+alias fnr='perl -i -pe'
 
 alias ls='ls -lG'
 
