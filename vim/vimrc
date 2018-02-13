@@ -271,6 +271,10 @@ nnoremap <S-K> <PageUp>
 xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
 
+" j and k should always work on virtual lines
+nnoremap j gj
+nnoremap k gk
+
 " but keep line joining enabled via leader
 noremap <Leader><S-J> <S-J>
 
