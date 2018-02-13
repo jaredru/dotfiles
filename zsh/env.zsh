@@ -12,7 +12,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # Node
 #
 
-chnode 8 > /dev/null
+chnode 9 > /dev/null
 
 #
 # Ruby
