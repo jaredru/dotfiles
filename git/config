@@ -23,11 +23,11 @@
     sup = submodule update --recursive --init
 
     d  = diff
-    dp = !"f() { git diff $1~ $1; }; f"
+    dp = !"f() { git diff ${1-HEAD}~ ${1-HEAD}; }; f"
     dc = diff --cached
 
     dt  = difftool
-    dtp = !"f() { git difftool $1~ $1; }; f"
+    dtp = !"f() { git difftool ${1-HEAD}~ ${1-HEAD}; }; f"
     dtc = difftool --cached
 
     mt = mergetool
