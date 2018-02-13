@@ -3,6 +3,10 @@
 # Config
 #
 
+# vi mode
+# do this first to ensure all subsequent bindings apply to this mode
+bindkey -v
+
 # enable advanced glob features
 setopt extended_glob
 
