@@ -15,6 +15,11 @@ alias rmt='trash'
 
 alias vim='nvim'
 
-psgrep() { ps up $(pgrep -f $@) 2>&-; }
+#
+# Funcs
+#
 
+hist() { print -z $(fc -ln 1 | fzf -q $@) }
+
+psgrep() { ps up $(pgrep -f $@) 2>&-; }
 
