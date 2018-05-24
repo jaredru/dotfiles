@@ -69,15 +69,15 @@ alias reload="profile-reload"
 # save 10k commands total
 # save 10k commands per session
 HISTFILE=$ZCACHEDIR/history
-SAVEHIST=10000
-HISTSIZE=10000
+SAVEHIST=100000
+HISTSIZE=100000
 
 # better color switching
 # https://wiki.archlinux.org/index.php/zsh#Colors
 autoload -Uz colors && colors
 
 # better tab completion support
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -d $ZCACHEDIR/compdump
 
 # be case insensitive
 # i need to read into this more, but the second bit (r:...) matches within filenames as well
