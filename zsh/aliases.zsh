@@ -19,7 +19,7 @@ alias vim='nvim'
 # Funcs
 #
 
-hist() { print -z $(fc -ln 1 | fzf -q $@) }
+hist() { print -z $(fc -ln 1 | fzf -q "$*") }
 
-psgrep() { ps up $(pgrep -f $@) 2>&-; }
+psgrep() { ps up $(pgrep -f "$*") 2>&-; }
 
