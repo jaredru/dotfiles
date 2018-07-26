@@ -34,6 +34,10 @@ set undofile
 " Plug
 "
 
+if has('python3')
+  silent! python3 1
+endif
+
 set runtimepath^=$XDG_CONFIG_HOME/vim
 call plug#begin(s:cache_path('plugged'))
 
