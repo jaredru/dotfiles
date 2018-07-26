@@ -63,3 +63,5 @@
     clean = git-media-clean %f
     smudge = git-media-smudge %f
 
+[rebase]
+	autoStash = true
