@@ -10,8 +10,8 @@ bindkey -v
 # enable advanced glob features
 setopt extended_glob
 
-# get all .zsh files in our config path except antigen
-config_files=($XDG_CONFIG_HOME/**/*.zsh~*/antigen/*)
+# get all .zsh files in our config path except antibody
+config_files=($XDG_CONFIG_HOME/**/*.zsh~*/antibody/*)
 
 # source them all
 for file in $config_files; do
@@ -40,7 +40,10 @@ source <(antibody init)
 antibody bundle mafredri/zsh-async
 antibody bundle jaredru/zsh-polka
 antibody bundle jaredru/zsh-pure
-antibody bundle zsh-users/zsh-syntax-highlighting
+antibody bundle zdharma/fast-syntax-highlighting
+antibody bundle zsh-users/zsh-autosuggestions
+
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=polka-handle-enter
 
 #
 # Profile
@@ -66,11 +69,20 @@ alias reload="profile-reload"
 #
 
 # save command history
-# save 10k commands total
-# save 10k commands per session
+# save 100k commands total
+# save 100k commands per session
 HISTFILE=$ZCACHEDIR/history
 SAVEHIST=100000
 HISTSIZE=100000
+
+# remove older dupes from history
+# remove extra blanks from each history item
+# write to $HISTFILE on demand instead of on exit
+# read to and write from $HISTFILE on demand instead of on exit
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt inc_append_history
+setopt share_history
 
 # better color switching
 # https://wiki.archlinux.org/index.php/zsh#Colors
