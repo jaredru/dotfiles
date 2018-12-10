@@ -279,6 +279,10 @@ xnoremap <S-K> <S-PageUp>
 nnoremap j gj
 nnoremap k gk
 
+" 0 and $ should work on virtual lines when wrapping
+nnoremap <silent> 0 :normal! <C-R>=&wrap ? "g0" : "0"<CR><CR>
+nnoremap <silent> $ :normal! <C-R>=&wrap ? "g$" : "$"<CR><CR>
+
 " but keep line joining enabled via leader
 noremap <Leader><S-J> <S-J>
 
