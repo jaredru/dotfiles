@@ -261,7 +261,7 @@ vnoremap > >gv
 vnoremap < <gv
 
 " $ doesn't go past the last char with virtualedit=onemore
-nnoremap <silent> $ :call cursor(line('.'), col('$'))<CR>
+nnoremap <silent> $ $l
 
 " visual paste should delete to the black hole register first so we don't
 " overwrite the unnamed register
@@ -276,12 +276,17 @@ xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
 
 " j and k should always work on virtual lines
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
 
 " 0 and $ should work on virtual lines when wrapping
-nnoremap <silent> 0 :normal! <C-R>=&wrap ? "g0" : "0"<CR><CR>
-nnoremap <silent> $ :normal! <C-R>=&wrap ? "g$" : "$"<CR><CR>
+function! s:Move(m)
+    exec "normal! " . (&wrap ? "g" : "") . a:m
+endfunction
+nnoremap <silent> 0 :call <SID>Move("0")<CR>
+nnoremap <silent> $ :call <SID>Move("$")<CR>
+vnoremap <silent> 0 <C-C>:call <SID>Move("0")<CR>v`<o
+vnoremap <silent> $ <C-C>:call <SID>Move("$l")<CR>v`>o
 
 " but keep line joining enabled via leader
 noremap <Leader><S-J> <S-J>
