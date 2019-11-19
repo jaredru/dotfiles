@@ -7,9 +7,9 @@ set +u
 source ${0:a:h}/chruby.zsh
 chruby 2
 
-gemlist=$(gem list)
+local gemlist=$(gem list)
 install() {
-    if [ -z "$(echo "$gemlist" | grep "^$1 ")" ]; then
+    if ! echo "$gemlist" | grep -q "^$1 "; then
         gem install "$1"
     fi
 }

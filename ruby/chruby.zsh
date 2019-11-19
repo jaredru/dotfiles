@@ -1,10 +1,14 @@
 
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+local share="$HOMEBREW_PREFIX/share/chruby"
 
-local cellar=$(brew --cellar)
-export RUBIES=(
-    $cellar/ruby/*
-    $cellar/ruby@*/*
-)
+source "$share/chruby.sh"
+source "$share/auto.sh"
+
+(){
+    setopt local_options nullglob
+    export RUBIES=(
+        $HOMEBREW_CELLAR/ruby/*
+        $HOMEBREW_CELLAR/ruby@*/*
+    )
+}
 
