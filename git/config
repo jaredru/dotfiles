@@ -5,7 +5,7 @@
 [help]
     format = html
 [core]
-    editor = mvim -f
+    editor = vim
 [push]
     default = simple
 [pull]
@@ -65,6 +65,8 @@
     clean = git-media-clean %f
     smudge = git-media-smudge %f
 
+
+
 [url "https://github.com/"]
-	insteadOf = git@github.com:
+    insteadOf = git@github.com:
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 set -efu -o pipefail
 
-ZSH_PATH="/usr/local/bin/zsh"
+ZSH_PATH=$(whence zsh)
 SHELLS_PATH="/etc/shells"
 
 if ! grep -Fxq "$ZSH_PATH" "$SHELLS_PATH"; then
-    echo "Adding $ZSH_PATH to "$SHELLS_PATH"; your password may be necessary."
+    #  title "Adding $ZSH_PATH to "$SHELLS_PATH"."
     echo "$ZSH_PATH" | sudo tee -a /etc/shells > /dev/null
 fi
 
