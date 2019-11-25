@@ -35,13 +35,14 @@ unset local_zshrc
 #
 
 export ANTIBODY_HOME=$ZCACHEDIR/antibody
-source <(antibody init)
+source $XDG_CONFIG_HOME/zsh/antibody/plugins.zsh
+#  source <(antibody init)
 
-antibody bundle mafredri/zsh-async
-antibody bundle jaredru/zsh-polka
-antibody bundle jaredru/zsh-pure
-antibody bundle zdharma/fast-syntax-highlighting
-antibody bundle zsh-users/zsh-autosuggestions
+#  antibody bundle mafredri/zsh-async
+#  antibody bundle jaredru/zsh-polka
+#  antibody bundle jaredru/zsh-pure
+#  antibody bundle zdharma/fast-syntax-highlighting
+#  antibody bundle zsh-users/zsh-autosuggestions
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=polka-handle-enter
 
@@ -97,9 +98,15 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 
 # use an interactive menu
 zstyle ":completion:*" menu select
+# test
+#  zstyle ':completion:*' group-name '' # group results by category
 
 # complete the first result by default
 setopt menu_complete
+# test
+#  setopt auto_list
+#  setopt auto_menu
+#  setopt always_to_end
 
 # <S-TAB> goes backwards
 bindkey "\e[Z" reverse-menu-complete

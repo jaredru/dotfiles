@@ -18,7 +18,7 @@ chnode 10 > /dev/null
 # Ruby
 #
 
-chruby 2.3 > /dev/null
+chruby 2.6 > /dev/null
 
 #
 # Go

@@ -43,23 +43,24 @@ call plug#begin(s:cache_path('plugged'))
 
 Plug 'jaredru/base16-vim'
 Plug 'jaredru/lightline.vim'
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
+" Plug 'ervandew/supertab'
+" Plug 'SirVer/ultisnips'
 Plug 'mbbill/undotree'
 Plug 'jaredru/vim-commenter',     { 'on': ['Comment', 'Uncomment'] }
 Plug 'junegunn/vim-easy-align',   { 'on': ['<Plug>(EasyAlign)'] }
 Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-prefix)', '<Plug>(easymotion-f)', '<Plug>(easymotion-s2)', '<Plug>(easymotion-sn)'] }
 Plug 'derekwyatt/vim-fswitch',    { 'on': ['FSHere'] }
 Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
+Plug 'vimwiki/vimwiki'
 
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
-Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
+" Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
 
 " file type
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee'] }
+Plug 'fatih/vim-go',             { 'for': ['go'] }
 Plug 'pangloss/vim-javascript',  { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx',              { 'for': ['javascript'] }
 Plug 'PProvost/vim-ps1',         { 'for': ['ps1'] }
@@ -238,19 +239,19 @@ let mapleader=','
 
 " automatically map various states properly
 function! MultiMap(lhs, rhs)
-    exec "noremap  <silent>" . a:lhs . "      " . a:rhs
-    exec "inoremap <silent>" . a:lhs . " <C-O>" . a:rhs
-    exec "vnoremap <silent>" . a:lhs . " <C-C>" . a:rhs . "gv"
+    exec "noremap  <silent>" . a:lhs . "      " . a:rhs . "<CR>"
+    exec "inoremap <silent>" . a:lhs . " <C-O>" . a:rhs . "<CR>"
+    exec "vnoremap <silent>" . a:lhs . "      " . a:rhs . "<CR>gv"
 endfunction
 
 " edit this file
-call MultiMap("<C-F1>", ":e " . expand("<sfile>:p") . "<CR>")
+call MultiMap("<C-F1>", ":e " . expand("<sfile>:p"))
 
 " enable/disable hlsearch
-call MultiMap("<Leader>hl", ":set hlsearch!<CR>")
+call MultiMap("<Leader>hl", ":set hlsearch!")
 
 " ctrl+w should close the buffer
-call MultiMap("<Leader>w", ":bd<CR>")
+call MultiMap("<Leader>w", ":bd")
 
 " switch buffers with ctrl-tab and ctrl-shift-tab
 noremap <C-TAB>   :bn<CR>
@@ -420,21 +421,21 @@ function! LightlineFugitive()
     return ''
 endfunction
 
-" ultisnips
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" " ultisnips
+" let g:UltiSnipsExpandTrigger       = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-" not sure if this is needed any longer. haven't used ultisnips in a while,
-" and my entire vim config has changed a lot since then.
-" let g:UltiSnipsSnippetsDir = s:cache_path('plugged') . "/ultisnips-snippets/UltiSnips"
-call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
+" " not sure if this is needed any longer. haven't used ultisnips in a while,
+" " and my entire vim config has changed a lot since then.
+" " let g:UltiSnipsSnippetsDir = s:cache_path('plugged') . "/ultisnips-snippets/UltiSnips"
+" call MultiMap("<C-F2>", ':UltiSnipsEdit')
 
 " filelist
-call MultiMap("<Leader>f", ":FileList<CR>")
+call MultiMap("<Leader>f", ":FileList")
 
 if has("mac")
-    let g:FileList_CacheGenerationCommand = 'rg -l "." {dir} | sed -E "s#(.*)/([^/]+$)#\2 (\1)#" | sort -f > {out}'
+    let g:FileList_CacheGenerationCommand = 'fd -t f . {dir} | sed -E "s#(.*)/([^/]+$)#\2 (\1)#" | sort -f > {out}'
 endif
 
 " filetypes
@@ -448,17 +449,17 @@ augroup SourceHeaderPairs
     autocmd BufEnter *                    let b:fswitchlocs = "./"
 augroup end
 
-call MultiMap("<C-F10>", ":FSHere<CR>")
+call MultiMap("<C-F10>", ":FSHere")
 
-" supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" " supertab
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " commenter
-nnoremap <silent> <C-K>      :Comment<CR>
+noremap  <silent> <C-K>      :Comment<CR>
 inoremap <silent> <C-K> <C-O>:Comment<CR>
 vnoremap <silent> <C-K>      :Comment<CR>gv
 
-nnoremap <silent> <C-J>      :Uncomment<CR>
+noremap  <silent> <C-J>      :Uncomment<CR>
 inoremap <silent> <C-J> <C-O>:Uncomment<CR>
 vnoremap <silent> <C-J>      :Uncomment<CR>gv
 
@@ -478,6 +479,17 @@ noremap <Leader>/ /
 " tab alignment
 nmap <Leader>a <Plug>(EasyAlign)ip
 vmap <Leader>a <Plug>(EasyAlign)
+
+" vimwiki
+let g:vimwiki_map_prefix = '<Leader>n'
+let g:vimwiki_list =
+  \ [
+  \   {
+  \     'path': '~/notes/',
+  \     'syntax': 'markdown',
+  \     'ext': '.md'
+  \   }
+  \ ]
 
 " jsx
 let g:jsx_ext_required = 0
