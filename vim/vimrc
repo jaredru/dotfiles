@@ -42,9 +42,8 @@ set runtimepath^=$XDG_CONFIG_HOME/vim
 call plug#begin(s:cache_path('plugged'))
 
 Plug 'jaredru/base16-vim'
-Plug 'jaredru/lightline.vim'
-" Plug 'ervandew/supertab'
-" Plug 'SirVer/ultisnips'
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mbbill/undotree'
 Plug 'jaredru/vim-commenter',     { 'on': ['Comment', 'Uncomment'] }
 Plug 'junegunn/vim-easy-align',   { 'on': ['<Plug>(EasyAlign)'] }
@@ -56,7 +55,6 @@ Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
-" Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
 
 " file type
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee'] }
@@ -407,12 +405,19 @@ let g:lightline =
   \         'left':  [['buffers']],
   \         'right': [[]],
   \     },
+  \     'component_expand': {
+  \         'buffers': 'lightline#bufferline#buffers',
+  \     },
   \     'component_function': {
   \         'fugitive': 'LightlineFugitive',
+  \     },
+  \     'component_type': {
+  \         'buffers': 'tabsel',
   \     },
   \     'separator':    { 'left': "\ue0b0", 'right': "\ue0b2" },
   \     'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
   \ }
+let g:lightline#bufferline#show_number = 1
 
 function! LightlineFugitive()
     if exists("*fugitive#head")
@@ -421,16 +426,6 @@ function! LightlineFugitive()
     endif
     return ''
 endfunction
-
-" " ultisnips
-" let g:UltiSnipsExpandTrigger       = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" " not sure if this is needed any longer. haven't used ultisnips in a while,
-" " and my entire vim config has changed a lot since then.
-" " let g:UltiSnipsSnippetsDir = s:cache_path('plugged') . "/ultisnips-snippets/UltiSnips"
-" call MultiMap("<C-F2>", ':UltiSnipsEdit')
 
 " filelist
 call MultiMap("<Leader>f", ":FileList")
@@ -451,9 +446,6 @@ augroup SourceHeaderPairs
 augroup end
 
 call MultiMap("<C-F10>", ":FSHere")
-
-" " supertab
-" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " commenter
 noremap  <silent> <C-K>      :Comment<CR>

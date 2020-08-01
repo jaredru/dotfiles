@@ -3,11 +3,12 @@
 # Aliases
 #
 
-alias cart='carthage'
+alias cat='bat --paging=never'
 
 alias fnr='perl -i -pe'
 
-alias ls='ls -lG'
+# alias ls='ls -lG'
+alias ls='exa -l'
 
 alias rg='rg -S'
 
