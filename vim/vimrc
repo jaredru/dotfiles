@@ -42,24 +42,23 @@ set runtimepath^=$XDG_CONFIG_HOME/vim
 call plug#begin(s:cache_path('plugged'))
 
 Plug 'jaredru/base16-vim'
-Plug 'jaredru/lightline.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
 Plug 'mbbill/undotree'
 Plug 'jaredru/vim-commenter',     { 'on': ['Comment', 'Uncomment'] }
 Plug 'junegunn/vim-easy-align',   { 'on': ['<Plug>(EasyAlign)'] }
 Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-prefix)', '<Plug>(easymotion-f)', '<Plug>(easymotion-s2)', '<Plug>(easymotion-sn)'] }
 Plug 'derekwyatt/vim-fswitch',    { 'on': ['FSHere'] }
 Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
 
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
-Plug 'https://bitbucket.org/fouvrai/ultisnips-snippets.git'
 
 " file type
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee'] }
+Plug 'fatih/vim-go',             { 'for': ['go'] }
 Plug 'pangloss/vim-javascript',  { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx',              { 'for': ['javascript'] }
 Plug 'PProvost/vim-ps1',         { 'for': ['ps1'] }
@@ -401,12 +400,19 @@ let g:lightline =
   \         'left':  [['buffers']],
   \         'right': [[]],
   \     },
+  \     'component_expand': {
+  \         'buffers': 'lightline#bufferline#buffers',
+  \     },
   \     'component_function': {
   \         'fugitive': 'LightlineFugitive',
+  \     },
+  \     'component_type': {
+  \         'buffers': 'tabsel',
   \     },
   \     'separator':    { 'left': "\ue0b0", 'right': "\ue0b2" },
   \     'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
   \ }
+let g:lightline#bufferline#show_number = 1
 
 function! LightlineFugitive()
     if exists("*fugitive#head")
@@ -415,16 +421,6 @@ function! LightlineFugitive()
     endif
     return ''
 endfunction
-
-" ultisnips
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" not sure if this is needed any longer. haven't used ultisnips in a while,
-" and my entire vim config has changed a lot since then.
-" let g:UltiSnipsSnippetsDir = s:cache_path('plugged') . "/ultisnips-snippets/UltiSnips"
-call MultiMap("<C-F2>", ':UltiSnipsEdit<CR>')
 
 " filelist
 call MultiMap("<Leader>f", ":FileList<CR>")

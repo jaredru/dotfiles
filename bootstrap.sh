@@ -73,7 +73,7 @@ bootstrap-env
 # bootstrap dependencies
 setopt extended_glob
 for file in $XDG_CONFIG_HOME/**/bootstrap.sh~$XDG_CONFIG_HOME/bootstrap.sh; do
-    title "Bootsrapping $(basename $(dirname $file))"
+    title "Bootstrapping $(basename $(dirname $file))"
     source "$file"
 done
 
