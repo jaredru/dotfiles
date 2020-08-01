@@ -5,11 +5,13 @@
 [help]
     format = html
 [core]
-    editor = mvim -f
+    editor = vim
 [push]
     default = simple
 [pull]
-    rebase = preserve
+    rebase = merges
+[rebase]
+	autoStash = true
 
 
 
@@ -63,6 +65,8 @@
     clean = git-media-clean %f
     smudge = git-media-smudge %f
 
-[rebase]
-	autoStash = true
+
+
+[url "https://github.com/"]
+	insteadOf = git@github.com:
 
