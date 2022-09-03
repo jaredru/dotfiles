@@ -52,7 +52,7 @@ install macvim
 install maven
 install "neovim/neovim/neovim" neovim
 install node
-install "node@8"
+install "node@16"
 install pstree
 install redis
 install ripgrep

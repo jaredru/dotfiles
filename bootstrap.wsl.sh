@@ -52,7 +52,7 @@ install go
 install jq
 install neovim
 install node
-install node@12
+install node@16
 install openjdk && brew link openjdk --force
 install pstree
 install redis
