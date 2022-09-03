@@ -1,3 +1,9 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 #
 # Local
@@ -17,25 +23,30 @@ bindkey -v
 # enable advanced glob features
 setopt extended_glob
 
-# source all .zsh files in our config path
-for file in $XDG_CONFIG_HOME/**/*.zsh; do
-    source $file
-done
+#
+# Prompt
+#
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 #
 # Plugins
 #
 
 export ANTIBODY_HOME=$ZCACHEDIR/antibody
-source <(antibody init)
 
-antibody bundle mafredri/zsh-async
-antibody bundle jaredru/zsh-polka
-antibody bundle jaredru/zsh-pure
-antibody bundle zdharma/fast-syntax-highlighting
-antibody bundle zsh-users/zsh-autosuggestions
+# run this to update the plugins file
+#  antibody bundle < $ZDOTDIR/antibody/plugins.txt > $ZDOTDIR/antibody/plugins.sh
+source $ZDOTDIR/antibody/plugins.sh
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=polka-handle-enter
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# source all .zsh files in our config path
+for file in $XDG_CONFIG_HOME/**/*.zsh; do
+    source $file
+done
 
 #
 # Profile

@@ -1,6 +1,7 @@
 mafredri/zsh-async
 jaredru/zsh-polka
 jaredru/zsh-pure
+romkatv/powerlevel10k
 zdharma/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions
 
