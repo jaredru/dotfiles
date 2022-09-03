@@ -35,7 +35,7 @@
     mt = mergetool
 
     save = !"git stash save --include-untracked && git stash apply"
-    trim = !"git remote | xargs git remote prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+    trim = !"git remote | xargs git remote prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D"
 
 
 
