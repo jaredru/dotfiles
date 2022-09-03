@@ -8,10 +8,6 @@ export REACT_EDITOR=code
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-if [[ -d "$HOME/bin" ]]; then
-    export PATH="$HOME/bin:$PATH"
-fi
-
 #
 # Android
 #
@@ -33,6 +29,9 @@ export GOPATH=~/code/go
 if command -v java_home > /dev/null; then
     export JAVA_HOME=$(command java_home -v 1.8)
 else
+    if [[ -d "/home/linuxbrew/.linuxbrew/opt/openjdk@11" ]]; then
+        export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@11/bin:$PATH"
+    fi
     export JAVA_HOME=$(dirname $(dirname $(readlink -e $(command -v javac))))
 fi
 
@@ -40,7 +39,7 @@ fi
 # Node
 #
 
-chnode 12 > /dev/null
+chnode 16 > /dev/null
 
 #
 # Ruby
