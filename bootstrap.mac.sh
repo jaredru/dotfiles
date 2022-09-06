@@ -4,14 +4,13 @@ set -efu -o pipefail
 # ensure homebrew is installed
 if ! command -v brew > /dev/null; then
     title "Installing homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# install brew packages
-casklist=$(brew cask list)
+local casklist=$(brew cask list)
 cask() {
-    if [ -z "$(echo "$casklist" | grep "\b${2:-$1}\b")" ]; then
-        brew cask install "$1"
+    if ! echo $casklist | grep -Fxq "${2:-$1}"; then
+        HOMEBREW_NO_AUTO_UPDATE=1 brew cask install "$1"
     fi
 }
 
@@ -19,49 +18,50 @@ cask 1password
 cask appcleaner
 cask docker
 cask google-chrome
-cask hyperdock
+#  cask hyperdock
 cask imageoptim
 cask itsycal
-cask java
+#  cask java
 cask kaleidoscope
 cask scroll-reverser
 cask sensiblesidebuttons
-cask sketch
 cask slack
 cask spotify
-cask vagrant
-cask virtualbox
 cask viscosity
 cask visual-studio-code
 
-brewlist=$(brew list)
+local brewlist=$(brew list)
 install() {
-    if [ -z "$(echo "$brewlist" | grep "\b${2:-$1}\b")" ]; then
-        brew install "$1"
+    if ! echo $brewlist | grep -Fxq "${2:-$1}"; then
+        echo
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install "$1"
     fi
 }
 
-install "getantibody/antibody/antibody" antibody
+install antibody
 install awscli
+install bat
 install chruby
+install dust
+install exa
+install fd
 install fzf
 install git
 install go
 install jq
 install macvim
-install maven
-install "neovim/neovim/neovim" neovim
+install neovim
 install node
-install "node@16"
+install node@16
+install openjdk && brew link openjdk --force
 install pstree
 install redis
 install ripgrep
 install ruby
-install "ruby@2.2"
-install sqlite
+install ruby@2.6
+install sd
 install trash
 install tree
-install watchman
 install yarn
 install zsh
 
