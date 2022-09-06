@@ -11,7 +11,7 @@ title() {
 
 # inspect our environment
 case "$OSTYPE" in
-    darwin)
+    darwin|darwin21.0)
         local env=mac
     ;;
     linux-gnu)
