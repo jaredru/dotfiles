@@ -3,8 +3,26 @@ set -efu -o pipefail
 
 # ensure homebrew is installed
 if ! command -v brew > /dev/null; then
-    title "Installing homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    local brew_bin=/opt/homebrew/bin
+
+    if [[ ! -x $brew_bin/brew ]]; then
+        title "Installing homebrew"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    local homebrew_env=$($brew_bin/brew shellenv)
+    eval "$homebrew_env"
+fi
+
+if [[ ! -e "$HOME/.zshrc" ]] || ! grep -Fxq "# Homebrew" "$HOME/.zshrc"; then
+    cat <<EOF > "$HOME/.zshrc"
+
+#
+# Homebrew
+#
+
+$(brew shellenv)
+EOF
 fi
 
 local casklist=$(brew cask list)

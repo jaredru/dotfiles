@@ -9,12 +9,14 @@ sudo apt-get -y install build-essential
 
 # ensure homebrew is installed
 if ! command -v brew > /dev/null; then
-    if [[ ! -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    local brew_bin=/home/linuxbrew/.linuxbrew/bin
+
+    if [[ ! -x $brew_bin/brew ]]; then
         title "Installing homebrew"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 
-    local homebrew_env=$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    local homebrew_env=$($brew_bin/brew shellenv)
     eval "$homebrew_env"
 fi
 
