@@ -23,6 +23,7 @@ case "$OSTYPE" in
     ;;
     *)
         echo "Unexpected OSTYPE: $OSTYPE"
+        return 1 2>/dev/null
         exit 1
     ;;
 esac
