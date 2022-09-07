@@ -4,7 +4,6 @@ set -efu -o pipefail
 # ensure homebrew is installed
 if ! command -v brew > /dev/null; then
     local brew_bin=/opt/homebrew/bin
-
     if [[ ! -x $brew_bin/brew ]]; then
         title "Installing homebrew"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -12,23 +11,24 @@ if ! command -v brew > /dev/null; then
 
     local homebrew_env=$($brew_bin/brew shellenv)
     eval "$homebrew_env"
-fi
 
-if [[ ! -e "$HOME/.zshrc" ]] || ! grep -Fxq "# Homebrew" "$HOME/.zshrc"; then
-    cat <<EOF > "$HOME/.zshrc"
+    if [[ ! -e "$HOME/.zshrc" ]] || ! grep -Fxq "# Homebrew" "$HOME/.zshrc"; then
+        cat <<EOF > "$HOME/.zshrc"
 
 #
 # Homebrew
 #
 
-$(brew shellenv)
+$homebrew_env
 EOF
+    fi
 fi
 
-local casklist=$(brew cask list)
+
+local casklist=$(brew list --cask)
 cask() {
     if ! echo $casklist | grep -Fxq "${2:-$1}"; then
-        HOMEBREW_NO_AUTO_UPDATE=1 brew cask install "$1"
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "$1"
     fi
 }
 
@@ -47,6 +47,7 @@ cask slack
 cask spotify
 cask viscosity
 cask visual-studio-code
+cask zoom
 
 local brewlist=$(brew list)
 install() {

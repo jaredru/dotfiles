@@ -18,17 +18,17 @@ if ! command -v brew > /dev/null; then
 
     local homebrew_env=$($brew_bin/brew shellenv)
     eval "$homebrew_env"
-fi
 
-if [[ ! -e "$HOME/.zshrc" ]] || ! grep -Fxq "# Homebrew" "$HOME/.zshrc"; then
-    cat <<EOF > "$HOME/.zshrc"
+    if [[ ! -e "$HOME/.zshrc" ]] || ! grep -Fxq "# Homebrew" "$HOME/.zshrc"; then
+        cat <<EOF > "$HOME/.zshrc"
 
 #
 # Homebrew
 #
 
-$(brew shellenv)
+$homebrew_env
 EOF
+    fi
 fi
 
 local brewlist=$(brew list)
