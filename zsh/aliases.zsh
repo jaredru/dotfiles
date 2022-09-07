@@ -3,18 +3,24 @@
 # Aliases
 #
 
-alias cat='bat --paging=never'
+[[ -n $commands[bat] ]] &&
+    alias cat='bat --paging=never'
 
-alias fnr='perl -i -pe'
+[[ -n $commands[perl] ]] &&
+    alias fnr='perl -i -pe'
 
 # alias ls='ls -lG'
-alias ls='exa -l'
+[[ -n $commands[exa] ]] &&
+    alias ls='exa -l'
 
-alias rg='rg -S'
+[[ -n $commands[rg] ]] &&
+    alias rg='rg -S'
 
-alias rmt='trash'
+[[ -n $commands[trash] ]] &&
+    alias rmt='trash'
 
-alias vim='nvim'
+[[ -n $commands[nvim] ]] &&
+    alias vim='nvim'
 
 #
 # Funcs
