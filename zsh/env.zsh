@@ -32,7 +32,7 @@ else
     if [[ -d "/home/linuxbrew/.linuxbrew/opt/openjdk@11" ]]; then
         export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@11/bin:$PATH"
     fi
-    export JAVA_HOME=$(dirname $(dirname $(readlink -e $(command -v javac))))
+    export JAVA_HOME=$(dirname $(dirname $(readlink -f $(command -v javac))))
 fi
 
 #
@@ -45,5 +45,5 @@ chnode 16 > /dev/null
 # Ruby
 #
 
-chruby 2.7 > /dev/null
+chruby 2.6 > /dev/null
 
