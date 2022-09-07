@@ -36,9 +36,17 @@ setopt extended_glob
 
 export ANTIBODY_HOME=$ZCACHEDIR/antibody
 
-# run this to update the plugins file
-#  antibody bundle < $ZDOTDIR/antibody/plugins.txt > $ZDOTDIR/antibody/plugins.sh
-source $ZDOTDIR/antibody/plugins.sh
+() {
+    local antibody_plugins_txt=$ZDOTDIR/antibody/plugins.txt
+    local antibody_plugins_sh=$ANTIBODY_HOME/plugins.sh
+    local antibody_plugins_md5=$antibody_plugins_sh.md5
+
+    if [[ ! -f $antibody_plugins_sh ]] || [[ ! -f $antibody_plugins_md5 ]] || ! md5sum --status --check $antibody_plugins_md5; then
+        antibody bundle < $antibody_plugins_txt > $antibody_plugins_sh
+        md5sum $antibody_plugins_txt $antibody_plugins_sh > $antibody_plugins_md5
+    fi
+    source $antibody_plugins_sh
+}
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=polka-handle-enter
 ZSH_AUTOSUGGEST_USE_ASYNC=1
