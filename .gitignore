@@ -2,6 +2,7 @@
 # generated
 .netrwhist
 .zcompdump
+zsh/antibody/plugins.sh
 
 # private
 forge/
