@@ -96,7 +96,9 @@ if has("gui_running")
     endif
 
     " use a better font
-    set guifont=Meslo\ LG\ S\ for\ Powerline:h11
+    " set guifont=Meslo\ LG\ S\ for\ Powerline:h11
+    " set guifont=Cascadia\ Code\ PL:h12
+    set guifont=Consolas\ NF:h13
 
     if has("win32")
         " set guifont=Consolas:h9
