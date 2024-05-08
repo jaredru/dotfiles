@@ -5,7 +5,7 @@ set -efu -o pipefail
 set +u
 
 source ${0:a:h}/chruby.zsh
-chruby 2
+chruby 3
 
 local gemlist=$(gem list)
 install() {

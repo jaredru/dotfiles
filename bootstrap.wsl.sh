@@ -46,7 +46,7 @@ install awscli
 install bat
 install chruby
 install dust
-install exa
+install eza
 install fd
 install fzf
 install git
@@ -54,13 +54,12 @@ install go
 install jq
 install neovim
 install node
-install node@16
+install node@18
 install openjdk && brew link openjdk --force
 install pstree
 install redis
 install ripgrep
 install ruby
-install ruby@2.6
 install sd
 install tree
 install yarn

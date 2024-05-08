@@ -39,11 +39,11 @@ fi
 # Node
 #
 
-chnode 16 > /dev/null
+chnode 18 > /dev/null
 
 #
 # Ruby
 #
 
-chruby 2 > /dev/null
+chruby 3 > /dev/null
 

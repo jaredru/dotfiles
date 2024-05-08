@@ -10,8 +10,8 @@
     alias fnr='perl -i -pe'
 
 # alias ls='ls -lG'
-[[ -n $commands[exa] ]] &&
-    alias ls='exa -l'
+[[ -n $commands[eza] ]] &&
+    alias ls='eza -l'
 
 [[ -n $commands[rg] ]] &&
     alias rg='rg -S'

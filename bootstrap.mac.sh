@@ -35,14 +35,14 @@ cask() {
 cask 1password
 cask appcleaner
 cask docker
+cask firefox
 cask google-chrome
 #  cask hyperdock
 cask imageoptim
 cask itsycal
 #  cask java
-cask kaleidoscope
 cask scroll-reverser
-cask sensiblesidebuttons
+#  cask sensiblesidebuttons
 cask slack
 cask spotify
 cask viscosity
@@ -62,7 +62,7 @@ install awscli
 install bat
 install chruby
 install dust
-install exa
+install eza
 install fd
 install fzf
 install git
@@ -71,13 +71,12 @@ install jq
 install macvim
 install neovim
 install node
-install node@16
+install node@18
 install openjdk && brew link openjdk --force
 install pstree
 install redis
 install ripgrep
 install ruby
-install ruby@2.6
 install sd
 install trash
 install tree
