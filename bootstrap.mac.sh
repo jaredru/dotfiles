@@ -36,16 +36,20 @@ cask 1password
 cask appcleaner
 cask docker
 cask firefox
+cask ghostty
 cask google-chrome
 #  cask hyperdock
 cask imageoptim
 cask itsycal
 #  cask java
+cask obsidian
+cask rectangle
 cask scroll-reverser
 #  cask sensiblesidebuttons
 cask slack
+cask sonos
 cask spotify
-cask viscosity
+#  cask viscosity
 cask visual-studio-code
 cask zoom
 
