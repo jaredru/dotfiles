@@ -3,6 +3,8 @@
 .netrwhist
 .zcompdump
 zsh/antibody/plugins.sh
+zsh/.zsh_history
+zsh/.zsh_sessions/
 
 # private
 forge/
