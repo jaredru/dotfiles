@@ -118,6 +118,7 @@ endif
 
 " set the default color scheme
 set background=dark
+set notermguicolors
 colorscheme base16-twilight
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
