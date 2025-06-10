@@ -7,6 +7,7 @@ export EDITOR=mvim
 export REACT_EDITOR=code
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_NO_ENV_HINTS=1
 
 #
 # Android
