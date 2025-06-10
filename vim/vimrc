@@ -52,7 +52,6 @@ Plug 'derekwyatt/vim-fswitch',    { 'on': ['FSHere'] }
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
-Plug 'vimwiki/vimwiki'
 
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
 
@@ -474,17 +473,6 @@ noremap <Leader>/ /
 " tab alignment
 nmap <Leader>a <Plug>(EasyAlign)ip
 vmap <Leader>a <Plug>(EasyAlign)
-
-" vimwiki
-let g:vimwiki_map_prefix = '<Leader>n'
-let g:vimwiki_list =
-  \ [
-  \   {
-  \     'path': '~/notes/',
-  \     'syntax': 'markdown',
-  \     'ext': '.md'
-  \   }
-  \ ]
 
 " jsx
 let g:jsx_ext_required = 0
