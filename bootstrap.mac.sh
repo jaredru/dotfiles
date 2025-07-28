@@ -75,7 +75,7 @@ install jq
 install macvim
 install neovim
 install node
-install node@18
+install node@20
 install openjdk && brew link openjdk --force
 install pstree
 install redis

@@ -40,7 +40,7 @@ fi
 # Node
 #
 
-chnode 18 > /dev/null
+chnode 20 > /dev/null
 
 #
 # Ruby
