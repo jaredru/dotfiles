@@ -44,6 +44,35 @@
 
 
 
+[delta]
+    line-numbers-left-style  = "#A7A7A7"
+    line-numbers-right-style = "#A7A7A7"
+    line-numbers-minus-style = "#CF6A4C"
+    line-numbers-zero-style  = "#5F5A60"
+    line-numbers-plus-style  = "#8F9D6A"
+    hunk-header-style        = syntax
+    minus-style                   = syntax "#281E1E"
+    minus-non-emph-style          = syntax "#281E1E"
+    minus-emph-style              = syntax "#3C1E1E"
+    minus-empty-line-marker-style = normal "#281E1E"
+    zero-style                    = syntax
+    plus-style                    = syntax "#1E281E"
+    plus-non-emph-style           = syntax "#1E281E"
+    plus-emph-style               = syntax "#1E3C1E"
+    plus-empty-line-marker-style  = normal "#1E281E"
+    line-numbers = true
+    map-styles   = bold purple => syntax magenta, bold cyan => syntax blue
+    navigate     = true
+    syntax-theme = base16
+[core]
+    pager  = delta
+[interactive]
+    diffFilter = delta --color-only
+[diff]
+    colorMoved = default
+[merge]
+    conflictstyle = zdiff3
+
 [difftool]
     prompt = false
 [difftool "Kaleidoscope"]
