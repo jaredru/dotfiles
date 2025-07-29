@@ -8,3 +8,4 @@ window-height = 32
 
 keybind = unconsumed:ctrl+tab=ignore
 keybind = unconsumed:ctrl+shift+tab=ignore
+keybind = shift+enter=text:\n
