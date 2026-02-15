@@ -3,9 +3,9 @@ theme = Base16 Twilight
 font-family = Consolas NF
 font-size = 13
 
-window-width = 105
-window-height = 32
+window-width = 107
+window-height = 82
 
-keybind = unconsumed:ctrl+tab=ignore
-keybind = unconsumed:ctrl+shift+tab=ignore
+keybind = unconsumed:ctrl+tab=text:
+keybind = unconsumed:ctrl+shift+tab=text:
 keybind = shift+enter=text:\n
