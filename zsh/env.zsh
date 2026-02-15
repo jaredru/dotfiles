@@ -46,5 +46,5 @@ chnode 20 > /dev/null
 # Ruby
 #
 
-chruby 3 > /dev/null
+chruby 4 > /dev/null
 
