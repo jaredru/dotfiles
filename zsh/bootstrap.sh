@@ -13,4 +13,3 @@ if [ "$SHELL" != "$ZSH_PATH" ]; then
     chsh -s "$ZSH_PATH"
 fi
 
-antibody bundle < $ZDOTDIR/antibody/plugins.txt > $ZDOTDIR/antibody/plugins.sh

@@ -40,8 +40,9 @@ install() {
 }
 
 install gcc
+install gcc@5
 
-install antibody
+install antidote
 install awscli
 install bat
 install chruby

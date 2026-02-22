@@ -34,19 +34,25 @@ setopt extended_glob
 # Plugins
 #
 
-export ANTIBODY_HOME=$ZCACHEDIR/antibody
+export ANTIDOTE_HOME=$ZCACHEDIR/antidote
+mkdir -p $ANTIDOTE_HOME
 
 () {
-    local antibody_plugins_txt=$ZDOTDIR/antibody/plugins.txt
-    local antibody_plugins_sh=$ANTIBODY_HOME/plugins.sh
-    local antibody_plugins_md5=$antibody_plugins_sh.md5
+    local antidote_plugins_txt=$ZDOTDIR/antidote/plugins.txt
+    local antidote_plugins_sh=$ANTIDOTE_HOME/plugins.sh
+    local antidote_plugins_md5=$antidote_plugins_sh.md5
     local md5_digest=$(openssl md5 -r $antibody_plugins_txt $antibody_plugins_sh)
 
-    if [[ ! -f $antibody_plugins_sh ]] || [[ ! -f $antibody_plugins_md5 ]] || [[ "$md5_digest" != "$(<$antibody_plugins_md5)" ]]; then
-        antibody bundle < $antibody_plugins_txt > $antibody_plugins_sh
-        echo "$md5_digest" > $antibody_plugins_md5
+    if [[ ! -f $antidote_plugins_sh ]] || [[ ! -f $antidote_plugins_md5 ]] || ! md5sum --status --check $antidote_plugins_md5; then
+        fpath=($(brew --prefix antidote)/share/antidote/functions $fpath)
+        autoload -Uz antidote
+
+        antidote bundle < $antidote_plugins_txt > $antidote_plugins_sh
+
+        echo "$md5_digest" > $antidote_plugins_md5
+        md5sum $antidote_plugins_txt $antidote_plugins_sh > $antidote_plugins_md5
     fi
-    source $antibody_plugins_sh
+    source $antidote_plugins_sh
 }
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=polka-handle-enter
