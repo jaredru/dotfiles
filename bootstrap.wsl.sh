@@ -40,7 +40,6 @@ install() {
 }
 
 install gcc
-install gcc@5
 
 install antidote
 install awscli
