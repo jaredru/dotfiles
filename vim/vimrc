@@ -56,7 +56,6 @@ Plug 'tpope/vim-surround'
 Plug 'https://bitbucket.org/fouvrai/vim-filelist.git'
 
 " file type
-Plug 'kchmck/vim-coffee-script', { 'for': ['coffee'] }
 Plug 'fatih/vim-go',             { 'for': ['go'] }
 Plug 'pangloss/vim-javascript',  { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx',              { 'for': ['javascript'] }
@@ -240,9 +239,9 @@ let mapleader=','
 
 " automatically map various states properly
 function! MultiMap(lhs, rhs)
-    exec "noremap  <silent>" . a:lhs . "      " . a:rhs . "<CR>"
+    exec "nnoremap <silent>" . a:lhs . "      " . a:rhs . "<CR>"
     exec "inoremap <silent>" . a:lhs . " <C-O>" . a:rhs . "<CR>"
-    exec "vnoremap <silent>" . a:lhs . "      " . a:rhs . "<CR>gv"
+    exec "xnoremap <silent>" . a:lhs . "      " . a:rhs . "<CR>gv"
 endfunction
 
 " edit this file
@@ -254,6 +253,9 @@ call MultiMap("<Leader>hl", ":set hlsearch!")
 " ctrl+w should close the buffer
 call MultiMap("<Leader>w", ":bd")
 
+" cmd+c should copy selected text
+vnoremap <D-c> "+ygv
+
 " switch buffers with ctrl-tab and ctrl-shift-tab
 noremap <C-TAB>   :bn<CR>
 noremap <C-S-TAB> :bp<CR>
@@ -261,9 +263,6 @@ noremap <C-S-TAB> :bp<CR>
 " when text is selected, < and > indent
 vnoremap > >gv
 vnoremap < <gv
-
-" $ doesn't go past the last char with virtualedit=onemore
-nnoremap <silent> $ $l
 
 " visual paste should delete to the black hole register first so we don't
 " overwrite the unnamed register
@@ -278,17 +277,17 @@ xnoremap <S-J> <S-PageDown>
 xnoremap <S-K> <S-PageUp>
 
 " j and k should always work on virtual lines
-noremap j gj
-noremap k gk
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
 
 " 0 and $ should work on virtual lines when wrapping
-function! s:Move(m)
-    exec "normal! " . (&wrap ? "g" : "") . a:m
-endfunction
-nnoremap <silent> 0 :call <SID>Move("0")<CR>
-nnoremap <silent> $ :call <SID>Move("$")<CR>
-vnoremap <silent> 0 <C-C>:call <SID>Move("0")<CR>v`<o
-vnoremap <silent> $ <C-C>:call <SID>Move("$l")<CR>v`>o
+" $ doesn't go past the last char with virtualedit=onemore
+nnoremap <expr> 0 &wrap ? 'g0'  : '0'
+nnoremap <expr> $ &wrap ? 'g$l' : '$l'
+xnoremap <expr> 0 &wrap ? 'g0'  : '0'
+xnoremap <expr> $ &wrap ? 'g$'  : '$'
 
 " but keep line joining enabled via leader
 noremap <Leader><S-J> <S-J>
@@ -437,7 +436,6 @@ if has("mac")
 endif
 
 " filetypes
-autocmd BufEnter *.cson   set filetype=coffee
 autocmd BufEnter *.panel  set filetype=json
 autocmd BufEnter Fastfile set filetype=ruby
 
