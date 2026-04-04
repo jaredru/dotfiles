@@ -10,7 +10,12 @@ zsh/.zsh_sessions/
 forge/
 
 # things i don't care to track
+.android/
+cagent/
+coderv2/
 composer/
 configstore/
+gh/
 JetBrains/
-
+pip/
+swiftpm/
