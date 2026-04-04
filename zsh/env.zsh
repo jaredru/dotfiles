@@ -21,7 +21,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 #
 
 export GOPATH=~/code/go
-#  export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin
 
 #
 # Java
@@ -46,5 +46,5 @@ chnode 20 > /dev/null
 # Ruby
 #
 
-chruby 4 > /dev/null
+chruby 3 > /dev/null
 
