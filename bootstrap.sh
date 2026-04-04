@@ -45,7 +45,6 @@ if [[ -d $XDG_CONFIG_HOME/.git ]]; then
         title "Updating dotfiles repo in $XDG_CONFIG_HOME"
         pushd $XDG_CONFIG_HOME
         git pull
-        git submodule update --init --recursive
         popd
     fi
 else
@@ -60,10 +59,16 @@ title "Setting up symlinks in $HOME"
 for file in $XDG_CONFIG_HOME/**/*.symlink; do
     local home_file=$HOME/.$(basename "${file%.symlink}")
 
-    if [[ ! -e $home_file ]]; then
-        ln -s $file $home_file
+    if [[ -L $home_file ]]; then
+        if [[ $(readlink "$home_file") != "$file" ]]; then
+            echo "Updating symlink: $home_file"
+            rm "$home_file"
+            ln -s "$file" "$home_file"
+        fi
+    elif [[ -e $home_file ]]; then
+        echo "WARNING: '$home_file' exists and is not a symlink, skipping."
     else
-        echo "File '$home_file' already exists."
+        ln -s "$file" "$home_file"
     fi
 done
 

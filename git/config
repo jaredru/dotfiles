@@ -5,15 +5,14 @@
 [help]
     format = html
 [core]
-    editor = vim
+    editor = nvim
+    pager  = delta
 [push]
     default = simple
 [pull]
     rebase = merges
 [rebase]
     autoStash = true
-
-
 
 [alias]
     lg  = log --graph --format=format:'%C(blue)%h %Creset%an %C(green)(%ar) %C(yellow)%d%n        %Creset%s%n' --abbrev-commit --date-order
@@ -37,12 +36,8 @@
     save = !"git stash save --include-untracked && git stash apply"
     trim = !"git remote | xargs git remote prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D"
 
-
-
 [credential]
     helper = osxkeychain
-
-
 
 [delta]
     line-numbers-left-style  = "#A7A7A7"
@@ -64,40 +59,33 @@
     map-styles   = bold purple => syntax "#2F2730", bold cyan => syntax "#253A51"
     navigate     = true
     syntax-theme = base16
-[core]
-    pager  = delta
 [interactive]
     diffFilter = delta --color-only
 [diff]
     colorMoved = default
+    tool = Kaleidoscope
+    indentHeuristic = true
 [merge]
     conflictstyle = zdiff3
+    tool = Kaleidoscope
 
 [difftool]
     prompt = false
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[diff]
-    tool = Kaleidoscope
-    indentHeuristic = true
-
 [mergetool]
     prompt = false
     keepBackup = false
 [mergetool "Kaleidoscope"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustExitCode = true
-[merge]
-    tool = Kaleidoscope
 
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
 
-
-
 [url "https://github.com/"]
     insteadOf = git@github.com:
 
 [init]
-	defaultBranch = main
+    defaultBranch = main

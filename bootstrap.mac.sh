@@ -72,7 +72,6 @@ install fzf
 install git
 install go
 install jq
-install macvim
 install neovim
 install node
 install node@20

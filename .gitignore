@@ -16,6 +16,13 @@ coderv2/
 composer/
 configstore/
 gh/
+gocode/
 JetBrains/
+opencode/
 pip/
 swiftpm/
+
+# editor temp files
+*.swp
+*.swo
+*~

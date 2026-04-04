@@ -3,7 +3,7 @@
 # Environment
 #
 
-export EDITOR=mvim
+export EDITOR=nvim
 export REACT_EDITOR=code
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -40,11 +40,19 @@ fi
 # Node
 #
 
-chnode 20 > /dev/null
+if command -v chnode &>/dev/null; then
+    chnode 20 > /dev/null
+else
+    echo "warning: chnode not found" >&2
+fi
 
 #
 # Ruby
 #
 
-chruby 3 > /dev/null
+if command -v chruby &>/dev/null; then
+    chruby 3 > /dev/null
+else
+    echo "warning: chruby not found" >&2
+fi
 
