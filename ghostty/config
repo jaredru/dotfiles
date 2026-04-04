@@ -1,4 +1,6 @@
-theme = Base16 Twilight
+theme = base24-twilight
+palette-generate = true
+macos-icon = custom-style
 
 font-family = Consolas NF
 font-size = 13

@@ -1,0 +1,44 @@
+{
+  "plugins": {
+    "nvim-treesitter": {
+      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "undotree": {
+      "rev": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d",
+      "src": "https://github.com/mbbill/undotree"
+    },
+    "vim-commenter": {
+      "rev": "790430df826bd09c2367af9f2101f038cc7ad3c1",
+      "src": "https://github.com/jaredru/vim-commenter"
+    },
+    "vim-easy-align": {
+      "rev": "9815a55dbcd817784458df7a18acacc6f82b1241",
+      "src": "https://github.com/junegunn/vim-easy-align"
+    },
+    "vim-easymotion": {
+      "rev": "b3cfab2a6302b3b39f53d9fd2cd997e1127d7878",
+      "src": "https://github.com/easymotion/vim-easymotion"
+    },
+    "vim-filelist": {
+      "rev": "3dde3465b84b8241d064550e194850a315317273",
+      "src": "https://bitbucket.org/fouvrai/vim-filelist.git"
+    },
+    "vim-fswitch": {
+      "rev": "94acdd8bc92458d3bf7e6557df8d93b533564491",
+      "src": "https://github.com/derekwyatt/vim-fswitch"
+    },
+    "vim-fugitive": {
+      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
+      "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "vim-signify": {
+      "rev": "3b5ae37eb2b77c3ae58d60dfdc3fc30258078663",
+      "src": "https://github.com/mhinz/vim-signify"
+    },
+    "vim-surround": {
+      "rev": "3d188ed2113431cf8dac77be61b842acb64433d9",
+      "src": "https://github.com/tpope/vim-surround"
+    }
+  }
+}

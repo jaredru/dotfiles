@@ -1,0 +1,37 @@
+palette = 0=#1e1e1e
+palette = 1=#cf6a4c
+palette = 2=#8f9d6a
+palette = 3=#f9ee98
+palette = 4=#7587a6
+palette = 5=#9b859d
+palette = 6=#afc4db
+palette = 7=#a7a7a7
+palette = 8=#5f5a60
+palette = 9=#e6a591
+palette = 10=#b9c3a0
+palette = 11=#fff7bb
+palette = 12=#acb7cb
+palette = 13=#c5b7c6
+palette = 14=#dbe5f0
+palette = 15=#ffffff
+palette = 16=#cda869
+palette = 17=#9b703f
+palette = 18=#323537
+palette = 19=#464b50
+palette = 20=#838184
+palette = 21=#c3c3c3
+palette = 22=#191919
+palette = 23=#101010
+
+background = #1e1e1e
+foreground = #a7a7a7
+
+cursor-color = #a7a7a7
+#  cursor-text = #c6d0f5
+
+selection-background = #5f5a60
+#  selection-background = #a7a7a7
+#  selection-foreground = #464b50
+
+macos-icon-ghost-color  = #ffffff
+macos-icon-screen-color = #7587a6
