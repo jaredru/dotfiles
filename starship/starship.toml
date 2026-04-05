@@ -1,0 +1,81 @@
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$fill\
+$git_metrics\
+$status\
+$cmd_duration\
+$jobs\
+$line_break\
+$character"""
+
+add_newline = true
+
+[directory]
+style = "blue"
+before_repo_root_style = "blue"
+repo_root_style = "bold blue"
+format = "[\\[](bright black)[$path]($style)[\\]](bright black) "
+repo_root_format = "[\\[](bright black)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[\\]](bright black) "
+truncation_length = 8
+truncate_to_repo = false
+
+[git_branch]
+style = "green"
+format = "[$branch]($style) "
+
+[git_commit]
+style = "green"
+only_detached = true
+format = "[$hash]($style) "
+
+[git_state]
+style = "yellow"
+
+[git_status]
+style = "yellow"
+format = '([$all_status$ahead_behind]($style) )'
+stashed = "[*$count](green) "
+staged = "[+$count](green) "
+modified = "[~$count](yellow) "
+untracked = "[?$count](green) "
+renamed = "[→$count](yellow) "
+deleted = "[-$count](red) "
+conflicted = "[=$count](red) "
+ahead = "[⇡$count](green)"
+behind = "[⇣$count](red)"
+diverged = "[⇡${ahead_count}⇣${behind_count}](yellow)"
+
+[git_metrics]
+disabled = false
+format = "([+$added](dimmed green) )([-$deleted](dimmed red) )"
+
+[fill]
+symbol = " "
+
+[status]
+disabled = false
+format = "[$symbol$common_meaning$signal_name$status]($style) "
+style = "red"
+map_symbol = true
+
+[cmd_duration]
+min_time = 3000
+style = "yellow"
+format = "[$duration]($style) "
+show_milliseconds = false
+
+[jobs]
+style = "blue"
+format = "[$symbol$number]($style) "
+
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+vimcmd_visual_symbol = "[V](green)"
+vimcmd_replace_one_symbol = "[▶](green)"
+vimcmd_replace_symbol = "[▶](green)"

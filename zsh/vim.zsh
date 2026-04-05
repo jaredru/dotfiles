@@ -10,6 +10,7 @@ zle-line-init zle-keymap-select() {
         vicmd)      printf "\033[2 q";;
         viins|main) printf "\033[6 q";;
     esac
+    zle reset-prompt
 }
 
 zle -N zle-line-init

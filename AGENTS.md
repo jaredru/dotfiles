@@ -83,13 +83,13 @@ The colorscheme is intentionally terminal-palette-driven: change the terminal th
 
 Shell initialization follows this sequence:
 1. `~/.zshenv` (symlinked from `zsh/zshenv.symlink`) — sets XDG paths, ZDOTDIR, ZCACHEDIR
-2. `$ZDOTDIR/.zshrc` (`zsh/.zshrc`) — p10k instant prompt, then sources `~/.zshrc` (local)
+2. `$ZDOTDIR/.zshrc` (`zsh/.zshrc`) — the main shell config, which runs steps 3-6 in order
 3. `~/.zshrc` (local, created by homebrew bootstrap) — `eval "$(brew shellenv)"` which sets `HOMEBREW_PREFIX`, `HOMEBREW_CELLAR`, and adds brew to PATH
-4. Back in `$ZDOTDIR/.zshrc` — antidote plugins, then `for file in $XDG_CONFIG_HOME/**/*.zsh` sources all config
-5. The `**/*.zsh` glob auto-discovers config across all directories. Order is filesystem-dependent but safe because:
-   - `HOMEBREW_PREFIX` and `HOMEBREW_CELLAR` are set in step 3, before the glob runs
-   - Version manager scripts (`ruby/chruby.zsh`, `node/chnode.zsh`) guard against missing dependencies
-   - `zsh/env.zsh` guards version selection (`chnode 20`, `chruby 3`) against missing commands
+4. Starship prompt init, antidote plugins, mise activation
+5. `for file in $XDG_CONFIG_HOME/**/*.zsh` sources all config files
+6. History, completion, and keybinding setup
+
+The `**/*.zsh` glob auto-discovers config across all directories. Order is filesystem-dependent but safe because all dependencies (homebrew, mise, starship) are initialized before the glob runs in step 5.
 
 ### Version Managers
 
@@ -118,6 +118,5 @@ Mise (https://mise.jdx.dev/) manages language runtimes. Global versions are defi
 
 - **Vimscript, not Lua** — neovim config uses vimscript intentionally. The only Lua is the `vim.pack.add` block and treesitter autocmd in init.vim.
 - **Terminal palette colors only** — `nvim/colors/terminal.vim` uses `ctermfg`/`ctermbg` indices (0-23), never hex values. This keeps the colorscheme terminal-theme-agnostic.
-- **Guards are required** — any `.zsh` file that sources external tools or calls optional commands must guard with `command -v` or path checks. Silent failures on fresh machines cause debugging nightmares.
 - **Bootstrap must be idempotent** — running `bootstrap.sh` twice should produce the same result. Don't overwrite existing files without checking.
 - **Don't add features to the colorscheme that require `termguicolors`** — the entire theme system depends on `notermguicolors`.
