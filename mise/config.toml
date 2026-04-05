@@ -1,0 +1,11 @@
+[tools]
+bun = "latest"
+go = "latest"
+java = "temurin-17"
+node = "20"
+ruby = "3"
+
+[settings]
+
+[settings.ruby]
+compile = false

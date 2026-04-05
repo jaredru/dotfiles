@@ -37,22 +37,8 @@ else
 fi
 
 #
-# Node
-#
-
-if command -v chnode &>/dev/null; then
-    chnode 20 > /dev/null
-else
-    echo "warning: chnode not found" >&2
-fi
-
-#
 # Ruby
 #
 
-if command -v chruby &>/dev/null; then
-    chruby 3 > /dev/null
-else
-    echo "warning: chruby not found" >&2
-fi
+export GEMRC=$XDG_CONFIG_HOME/ruby/gemrc
 

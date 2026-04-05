@@ -20,8 +20,8 @@ The bootstrap system is self-contained: clone the repo to ~/.config, run `bootst
 | `ghostty/` | Ghostty terminal: base24-twilight theme, font/keybind config |
 | `terminal/` | macOS Terminal.app: base24-twilight theme, bootstrap plist setup |
 | `git/` | Git config: aliases, delta pager, Kaleidoscope difftool, global ignore |
-| `ruby/` | Ruby: chruby version manager sourcing, gem config |
-| `node/` | Node: chnode version manager sourcing, npm bootstrap |
+| `ruby/` | Ruby: gem config, gem bootstrap |
+| `node/` | Node: npm aliases |
 | `fonts/` | Font files: Consolas NF, Fira Code, Cascadia PL |
 | `bat/` | bat config (base16 theme) |
 | `sqlite/` | SQLite config (.sqliterc) |
@@ -93,9 +93,7 @@ Shell initialization follows this sequence:
 
 ### Version Managers
 
-- **Ruby**: chruby (sourced from homebrew, guarded by `$HOMEBREW_PREFIX` check)
-- **Node**: chnode (sourced via `whence`, guarded by `command -v` check)
-- Both select default versions in `zsh/env.zsh` with guards and stderr warnings
+Mise (https://mise.jdx.dev/) manages language runtimes. Global versions are defined in `mise/config.toml`. Mise is activated in `zsh/.zshrc` via `eval "$(mise activate zsh)"` — this runs after homebrew is on PATH but before the `**/*.zsh` glob, so mise-managed tools are available when env.zsh and other config files load.
 
 ## Key Files
 
@@ -105,7 +103,8 @@ Shell initialization follows this sequence:
 | `bootstrap.mac.sh` | Homebrew + cask + formula installation |
 | `zsh/zshenv.symlink` | First file loaded — XDG paths, ZDOTDIR, ZCACHEDIR |
 | `zsh/.zshrc` | Shell init — p10k, antidote, sources all *.zsh files |
-| `zsh/env.zsh` | EDITOR, PATH additions, version selection |
+| `mise/config.toml` | Global tool versions (node, ruby) for mise |
+| `zsh/env.zsh` | EDITOR, PATH additions, GEMRC |
 | `zsh/aliases.zsh` | Shell aliases (bat, eza, rg, nvim) |
 | `nvim/init.vim` | Neovim config — plugins, settings, mappings |
 | `nvim/colors/terminal.vim` | Colorscheme using base24 terminal palette |

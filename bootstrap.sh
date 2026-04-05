@@ -76,6 +76,12 @@ done
 title "Running $env bootstrap"
 bootstrap-env
 
+# install and activate mise-managed runtimes (before per-component bootstraps)
+title "Installing mise runtimes"
+mise trust $XDG_CONFIG_HOME/mise/config.toml
+mise install
+eval "$(mise activate zsh)"
+
 # bootstrap dependencies
 setopt extended_glob
 for file in $XDG_CONFIG_HOME/**/bootstrap.sh~$XDG_CONFIG_HOME/bootstrap.sh; do

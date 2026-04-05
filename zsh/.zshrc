@@ -57,6 +57,9 @@ mkdir -p $ANTIDOTE_HOME
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=polka-handle-enter
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# activate mise (version manager for node, ruby, etc.)
+eval "$(mise activate zsh)"
+
 # source all .zsh files in our config path
 for file in $XDG_CONFIG_HOME/**/*.zsh; do
     source $file

@@ -44,7 +44,6 @@ install gcc
 install antidote
 install awscli
 install bat
-install chruby
 install dust
 install eza
 install fd
@@ -52,14 +51,12 @@ install fzf
 install git
 install go
 install jq
+install mise
 install neovim
-install node
-install node@20
 install openjdk && brew link openjdk --force
 install pstree
 install redis
 install ripgrep
-install ruby
 install sd
 install tree
 install yarn
