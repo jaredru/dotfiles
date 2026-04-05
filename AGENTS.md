@@ -85,11 +85,11 @@ Shell initialization follows this sequence:
 1. `~/.zshenv` (symlinked from `zsh/zshenv.symlink`) — sets XDG paths, ZDOTDIR, ZCACHEDIR
 2. `$ZDOTDIR/.zshrc` (`zsh/.zshrc`) — the main shell config, which runs steps 3-6 in order
 3. `~/.zshrc` (local, created by homebrew bootstrap) — `eval "$(brew shellenv)"` which sets `HOMEBREW_PREFIX`, `HOMEBREW_CELLAR`, and adds brew to PATH
-4. Starship prompt init, antidote plugins, mise activation
+4. p10k instant prompt (cached), p10k config, antidote plugins, mise activation
 5. `for file in $XDG_CONFIG_HOME/**/*.zsh` sources all config files
 6. History, completion, and keybinding setup
 
-The `**/*.zsh` glob auto-discovers config across all directories. Order is filesystem-dependent but safe because all dependencies (homebrew, mise, starship) are initialized before the glob runs in step 5.
+The `**/*.zsh` glob auto-discovers config across all directories. Order is filesystem-dependent but safe because all dependencies (homebrew, mise, p10k) are initialized before the glob runs in step 5.
 
 ### Version Managers
 
@@ -102,6 +102,7 @@ Mise (https://mise.jdx.dev/) manages language runtimes. Global versions are defi
 | `bootstrap.sh` | Main entry point — OS detection, symlinks, sub-bootstraps |
 | `bootstrap.mac.sh` | Homebrew + cask + formula installation |
 | `zsh/zshenv.symlink` | First file loaded — XDG paths, ZDOTDIR, ZCACHEDIR |
+| `zsh/.p10k.zsh` | Powerlevel10k config — prompt layout, git formatter, vi mode symbols |
 | `zsh/.zshrc` | Shell init — p10k, antidote, sources all *.zsh files |
 | `mise/config.toml` | Global tool versions (node, ruby) for mise |
 | `zsh/env.zsh` | EDITOR, PATH additions, GEMRC |

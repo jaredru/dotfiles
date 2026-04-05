@@ -1,3 +1,5 @@
+romkatv/powerlevel10k
+mafredri/zsh-async
 jaredru/zsh-polka
 zdharma/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions

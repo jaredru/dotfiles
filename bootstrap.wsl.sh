@@ -57,7 +57,6 @@ install pstree
 install redis
 install ripgrep
 install sd
-install starship
 install tree
 install yarn
 install zsh
