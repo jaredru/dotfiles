@@ -23,18 +23,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export GOPATH=~/code/go
 export PATH=$PATH:$GOPATH/bin
 
-#
-# Java
-#
-
-if command -v java_home > /dev/null; then
-    export JAVA_HOME=$(command java_home -v 1.8)
-else
-    if [[ -d "/home/linuxbrew/.linuxbrew/opt/openjdk@11" ]]; then
-        export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@11/bin:$PATH"
-    fi
-    export JAVA_HOME=$(dirname $(dirname $(readlink -f $(command -v javac))))
-fi
 
 #
 # Ruby

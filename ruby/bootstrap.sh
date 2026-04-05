@@ -9,8 +9,6 @@ install() {
 }
 
 install cocoapods
-install fastlane
-install houston
 
 gem update
 gem cleanup

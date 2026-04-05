@@ -50,7 +50,7 @@ if [[ -d $XDG_CONFIG_HOME/.git ]]; then
 else
     # clone it
     title "Cloning dotfiles repo to $XDG_CONFIG_HOME"
-    git clone --recursive https://github.com/jaredru/dotfiles $XDG_CONFIG_HOME
+    git clone https://github.com/jaredru/dotfiles $XDG_CONFIG_HOME
 fi
 
 # symlink all the appropriate files

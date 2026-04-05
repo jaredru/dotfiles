@@ -53,7 +53,6 @@ install go
 install jq
 install mise
 install neovim
-install openjdk && brew link openjdk --force
 install pstree
 install redis
 install ripgrep

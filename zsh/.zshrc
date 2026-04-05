@@ -104,10 +104,6 @@ setopt hist_reduce_blanks
 setopt inc_append_history
 setopt share_history
 
-# better color switching
-# https://wiki.archlinux.org/index.php/zsh#Colors
-autoload -Uz colors && colors
-
 # better tab completion support
 autoload -Uz compinit && compinit -d $ZCACHEDIR/compdump
 
