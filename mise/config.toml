@@ -1,9 +1,11 @@
 [tools]
-bun = "latest"
-go = "latest"
-java = "temurin-17"
-node = "20"
-ruby = "3"
+bun      = "latest"
+go       = "latest"
+java     = "temurin-17"
+node     = "20"
+opencode = "latest"
+ruby     = "3"
+yarn     = "latest"
 
 [settings]
 

@@ -47,9 +47,9 @@ install bat
 install dust
 install eza
 install fd
+install fx
 install fzf
 install git
-install go
 install jq
 install mise
 install neovim
@@ -58,6 +58,5 @@ install redis
 install ripgrep
 install sd
 install tree
-install yarn
 install zsh
 
