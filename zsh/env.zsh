@@ -17,6 +17,12 @@ export ANDROID_HOME=~/code/android/sdk
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 #
+# Claude
+#
+
+export PATH=$HOME/.local/bin:$PATH
+
+#
 # Go
 #
 
