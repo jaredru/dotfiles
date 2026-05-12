@@ -2,7 +2,7 @@
 # fk you osx
 .DS_Store
 
-**/.claude/settings.local.json
-.jbx/
+.abx/
+agent-commit-lock
 mise.local.toml
 

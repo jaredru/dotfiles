@@ -1,5 +1,0 @@
-[env]
-CLAUDE_CODE_NO_FLICKER = "1"
-
-[copy]
-"~/.claude/" = ["settings.json", "CLAUDE.md", "statusline-command.sh", "memory/"]

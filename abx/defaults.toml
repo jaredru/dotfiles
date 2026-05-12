@@ -1,0 +1,33 @@
+
+[network]
+dns_fallback = "1.1.1.1:53"
+
+[env]
+GIT_AUTHOR_NAME     = "Jared Russell"
+GIT_AUTHOR_EMAIL    = "jared@jaredru.com"
+GIT_COMMITTER_NAME  = "Jared Russell"
+GIT_COMMITTER_EMAIL = "jared@jaredru.com"
+
+CLAUDE_CODE_NO_FLICKER = "1"
+
+[env.LLMGATEWAY_BASE_URL]
+from = "env"
+[env.LLMGATEWAY_AUTH_TOKEN]
+from = "env"
+
+
+[copy]
+"~/.claude/"        = ["settings.json", "statusline-command.sh", "memory/"]
+"~/.config/agents/" = ["AGENTS.md", "skills/"]
+"~/.opencode/"      = ["opencode.json"]
+
+
+[links]
+"~/.claude/CLAUDE.md"          = "~/.config/agents/AGENTS.md"
+"~/.claude/skills"             = "~/.config/agents/skills"
+
+"~/.codex/AGENTS.md"           = "~/.config/agents/AGENTS.md"
+"~/.codex/skills"              = "~/.config/agents/skills"
+
+"~/.config/opencode/AGENTS.md" = "~/.config/agents/AGENTS.md"
+
