@@ -28,6 +28,11 @@
 
 hist() { print -z $(fc -ln 1 | fzf --tac --tiebreak=index -q "$*") }
 
+mdv () {
+    local cols=$(tput cols)
+    fold -sw $(($cols - 3)) "$1" | glow -w $cols -
+}
+
 psgrep() { ps up $(pgrep -f "$*") 2>&-; }
 
 brew-deps() {
