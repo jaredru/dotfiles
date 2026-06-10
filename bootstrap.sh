@@ -29,7 +29,7 @@ case "$OSTYPE" in
 esac
 
 bootstrap-env() {
-    local src=${funcfiletrace[1]%:*}
+    local src=${funcsourcetrace[1]%:*}
     local dir=$(dirname $src)
     source "$dir/bootstrap.$env.sh"
 }
