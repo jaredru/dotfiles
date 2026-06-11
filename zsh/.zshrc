@@ -49,7 +49,13 @@ mkdir -p $ANTIDOTE_HOME
         fpath=($(brew --prefix antidote)/share/antidote/functions $fpath)
         autoload -Uz antidote
 
-        antidote bundle < $plugins_txt > $plugins_sh
+        tmp=$(mktemp)
+        if antidote bundle < "$plugins_txt" > "$tmp"; then
+            mv "$tmp" "$plugins_sh"
+        else
+            rm -f "$tmp"
+            echo "antidote bundle failed; $plugins_sh left untouched" >&2
+        fi
 
         local md5_digest=$(openssl md5 -r $plugins_txt $plugins_sh)
         echo "$md5_digest" > $plugins_md5
