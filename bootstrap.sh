@@ -29,7 +29,7 @@ case "$OSTYPE" in
 esac
 
 bootstrap-env() {
-    local src=${funcsourcetrace[1]%:*}
+    local src=${funcfiletrace[1]%:*}
     local dir=$(dirname $src)
     source "$dir/bootstrap.$env.sh"
 }
@@ -52,6 +52,9 @@ else
     title "Cloning dotfiles repo to $XDG_CONFIG_HOME"
     git clone https://github.com/jaredru/dotfiles $XDG_CONFIG_HOME
 fi
+
+# run bootstrap from disk if we were sourced
+[[ -f $0 ]] || exec $XDG_CONFIG_HOME/bootstrap.sh
 
 # symlink all the appropriate files
 title "Setting up symlinks in $HOME"
