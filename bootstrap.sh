@@ -14,7 +14,7 @@ case "$OSTYPE" in
     darwin*)
         local env=mac
     ;;
-    linux-gnu)
+    linux-gnu*)
         if uname -r | grep -q microsoft; then
             local env=wsl
         else
@@ -41,7 +41,7 @@ bootstrap-env() {
 # check if our config directory contains our dotfiles repo
 if [[ -d $XDG_CONFIG_HOME/.git ]]; then
     # if we don't have local changes, make sure it's up to date
-    if (cd $XDG_CONFIG_HOME; git diff-index --quiet HEAD); then
+    if [[ -z "${NO_GIT_UPDATE-}" ]] && (cd $XDG_CONFIG_HOME; git diff-index --quiet HEAD); then
         title "Updating dotfiles repo in $XDG_CONFIG_HOME"
         pushd $XDG_CONFIG_HOME
         git pull
@@ -54,7 +54,7 @@ else
 fi
 
 # run bootstrap from disk if we were sourced
-[[ -f $0 ]] || exec $XDG_CONFIG_HOME/bootstrap.sh
+[[ -f $0 ]] || NO_GIT_UPDATE=1 exec $XDG_CONFIG_HOME/bootstrap.sh
 
 # symlink all the appropriate files
 title "Setting up symlinks in $HOME"
