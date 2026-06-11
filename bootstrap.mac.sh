@@ -41,7 +41,6 @@ cask google-chrome
 #  cask hyperdock
 cask imageoptim
 cask itsycal
-#  cask java
 cask obsidian
 cask rectangle
 cask scroll-reverser
@@ -70,6 +69,7 @@ install fd
 install fx
 install fzf
 install git
+install git-delta
 install jq
 install mise
 install neovim

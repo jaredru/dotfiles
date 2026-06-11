@@ -50,6 +50,7 @@ install fd
 install fx
 install fzf
 install git
+install git-delta
 install jq
 install mise
 install neovim
